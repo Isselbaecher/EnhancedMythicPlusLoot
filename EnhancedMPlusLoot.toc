@@ -1,0 +1,13 @@
+## Interface: 100207
+## Title: EnhancedMPlusLoot
+## Version: 0.0.1
+## Notes: Enhances M+ Loot Interface
+## Author: Supersoaker of Eredar [EU]
+## IconTexture: Interface\Addons\EnhancedMPlusLoot\images\EMPL
+## SavedVariablesPerCharacter: EMPLdb
+
+Config.lua
+LootTables.lua
+MainFrame.lua
+GroupFinderFrame.lua
+EnhancedMPlusLoot.lua
