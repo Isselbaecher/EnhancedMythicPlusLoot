@@ -19,4 +19,9 @@ Tracked items automatically appear on the right side of the dungeon finder.
 Copy the files in this repository to a folder called EnhancedMythicPlusLoot  in your WoW AddOns folder
 
 ### Automatic installation
-This addon is available via CurseForge
+This addon is available via [CurseForge](https://www.curseforge.com/wow/addons/enhanced-mythic-plus-loot)
+
+# Roadmap
+- Rework in Ace3
+- Minimap Button
+- Automatic loot notification if another group member loots a tracked item
