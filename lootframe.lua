@@ -14,7 +14,7 @@ function EnhancedMPlusLoot:CreateLootFrame()
     local dungeonWidth = 40
     local itemWidth = frameWidth - dungeonWidth - 30
 
-    -- Loot Frame
+    -- Loot frame
     local frame = AceGUI:Create("Window")
     frame:SetTitle("Enhanced Mythic Plus Loot")
     frame.closebutton:SetPoint("TOPRIGHT", -2, -3)
