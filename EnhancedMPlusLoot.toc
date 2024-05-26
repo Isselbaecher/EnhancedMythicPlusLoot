@@ -4,10 +4,33 @@
 ## Notes: Enhances M+ Loot Interface
 ## Author: Supersoaker of Eredar [EU]
 ## IconTexture: Interface\Addons\EnhancedMPlusLoot\images\EMPL
-## SavedVariablesPerCharacter: EMPLdb
+## SavedVariables: EnhancedMPlusLootDB
 
-Config.lua
-LootTables.lua
-MainFrame.lua
-GroupFinderFrame.lua
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0\lib.xml
+libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceDB-3.0\AceDB-3.0.xml
+libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+libs\AceEvent-3.0\AceEvent-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceConsole-3.0\AceConsole-3.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\ACEGUI-3.0-SharedMediaWidgets\widget.xml
+libs\AceLocale-3.0\AceLocale-3.0.xml
+libs\AceHook-3.0\AceHook-3.0.xml
+libs\AceTimer-3.0\AceTimer-3.0.xml
+
+locales\enUS.lua
 EnhancedMPlusLoot.lua
+util.lua
+db.lua
+options.lua
+loottables.lua
+slashcommands.lua
+mainframe.lua
+lootframe.lua
+lootnotification.lua
