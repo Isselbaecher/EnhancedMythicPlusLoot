@@ -1,151 +1,177 @@
-local _, EMPL = ...
-EMPL.LootTables = {}
-local LootTables = EMPL.LootTables
+local L = EnhancedMPlusLoot.L
 
-EMPL.dungeonIDs = {{
-    shortName = "NO",
-    fullName = "Nokhud Offensive",
+local dungeonIDs = {{
+    shortName = L["NO"],
+    fullName = L["Nokhud Offensive"],
     id = 1198
 }, {
-    shortName = "AA",
-    fullName = "Algethar Academy",
+    shortName = L["AA"],
+    fullName = L["Algethar Academy"],
     id = 1201
 }, {
-    shortName = "RLP",
-    fullName = "Ruby Life Pools",
+    shortName = L["RLP"],
+    fullName = L["Ruby Life Pools"],
     id = 1202
 }, {
-    shortName = "AV",
-    fullName = "Azure Vault",
+    shortName = L["AV"],
+    fullName = L["Azure Vault"],
     id = 1203
 }, {
-    shortName = "NEL",
-    fullName = "Neltharus",
+    shortName = L["NEL"],
+    fullName = L["Neltharus"],
     id = 1199
 }, {
-    shortName = "BH",
-    fullName = "Brackenhide Hollow",
+    shortName = L["BH"],
+    fullName = L["Brackenhide Hollow"],
     id = 1196
 }, {
-    shortName = "HOI",
-    fullName = "Halls of Infusion",
+    shortName = L["HOI"],
+    fullName = L["Halls of Infusion"],
     id = 1204
 }, {
-    shortName = "ULD",
-    fullName = "Uldaman",
+    shortName = L["ULD"],
+    fullName = L["Uldaman"],
     id = 1197
 }}
 
-function LootTables:getMPlusLoot(reload)
-    local force = reload or false
-    if EMPLdb.loadedOnce and not force and EMPLdb.lootIntegritySuccess then
-        return
-    end
-    local itemsByDungeon = {}
-    local itemsBySlot = {}
-    local items = {}
-    local _, _, playerClass = UnitClass("player")
-    local tmpSpec = GetSpecialization()
-    local playerSpecialization, _, _, _, _, _, _ = GetSpecializationInfo(tmpSpec)
-    local maxwait = 100000
+local statMapping = {
+    ["ITEM_MOD_STAMINA_SHORT"] = "hasStamina",
+    ["ITEM_MOD_STRENGTH_SHORT"] = "hasStrength",
+    ["ITEM_MOD_AGILITY_SHORT"] = "hasAgility",
+    ["ITEM_MOD_INTELLECT_SHORT"] = "hasIntellect",
+    ["ITEM_MOD_CRIT_RATING_SHORT"] = "hasCrit",
+    ["ITEM_MOD_HASTE_RATING_SHORT"] = "hasHaste",
+    ["ITEM_MOD_MASTERY_RATING_SHORT"] = "hasMastery",
+    ["ITEM_MOD_VERSATILITY"] = "hasVersatility"
+}
+
+function EnhancedMPlusLoot:getLootTables()
+    self:Print("TODO getLootTables")
+end
+
+function EnhancedMPlusLoot:deleteLootTables()
+    self:Print("TODO deleteLootTables")
+end
+
+function EnhancedMPlusLoot:GenerateLootTables()
+    local lootByDungeon = {}
+    local lootBySlot = {}
+    local allLoot = {}
+
+    local classId = self.playerClassId
+    local specId = self.specId
+    local mythiDifficulty = 8
+    local mythicPlusLevel = self.db.profile.mythicPlusLevel
 
     EJ_ClearSearch()
     C_EncounterJournal.ResetSlotFilter()
     EJ_ResetLootFilter()
+    EJ_SetLootFilter(classId, specId)
+    EJ_SetDifficulty(mythiDifficulty)
+    C_EncounterJournal.SetPreviewMythicPlusLevel(mythicPlusLevel)
 
-    EJ_SetLootFilter(playerClass, playerSpecialization)
-    EJ_SetDifficulty(8)
-    C_EncounterJournal.SetPreviewMythicPlusLevel(EMPLdb.mythicPlusLevel)
-    EMPLdb.lootIntegritySuccess = true
-    for _, dungeon in pairs(EMPL.dungeonIDs) do
-        itemsByDungeon[dungeon.fullName] = {}
+    local corruptData = false
+
+    for _, dungeon in pairs(dungeonIDs) do
+        lootByDungeon[dungeon.id] = {}
+
         EJ_SelectInstance(dungeon.id)
-        local numItems = EJ_GetNumLoot()
-        local successfulItems = 0
-        for i = 1, numItems do
-            local currentItem = C_EncounterJournal.GetLootInfoByIndex(i)
-            local wait = 0
-            while currentItem.name == nil or currentItem.slot == nil do
-                wait = wait + 1
-                if wait > maxwait then
-                    currentItem = C_EncounterJournal.GetLootInfoByIndex(i)
-                    break
-                end
-            end
-            if currentItem.name ~= nil and currentItem.slot ~= nil and currentItem.slot ~= '' then
-                local item = {
-                    dungeonShortName = dungeon.shortName,
-                    dungeonFullname = dungeon.fullName,
-                    name = currentItem.name,
-                    icon = currentItem.icon,
-                    link = currentItem.link,
-                    slot = currentItem.slot:gsub("Held In ", ""),
-                    id = currentItem.itemID
+        local numLoot = EJ_GetNumLoot()
+
+        for i = 1, numLoot do
+            local currentLoot = C_EncounterJournal.GetLootInfoByIndex(i)
+            local lootStats = C_Item.GetItemStats("item:" .. tostring(currentLoot.itemID))
+            if currentLoot.name ~= nil and currentLoot.slot ~= nil and currentLoot.slot ~= '' then
+                local loot = {
+                    name = currentLoot.name,
+                    link = currentLoot.link,
+                    slot = currentLoot.slot,
+                    icon = currentLoot.icon,
+                    hasStamina = false,
+                    hasStrength = false,
+                    hasAgility = false,
+                    hasIntellect = false,
+                    hasCrit = false,
+                    hasHaste = false,
+                    hasMastery = false,
+                    hasVersatility = false,
+                    dungeonName = dungeon.fullName,
+                    dungeonShortName = dungeon.shortName
                 }
-                itemsByDungeon[dungeon.fullName][#itemsByDungeon[dungeon.fullName] + 1] = item
-                if itemsBySlot[item.slot] == nil then
-                    itemsBySlot[item.slot] = {}
+
+                for varname, statname in pairs(statMapping) do
+                    if lootStats[varname] then
+                        loot[statname] = true
+                    end
                 end
-                itemsBySlot[item.slot][#itemsBySlot[item.slot] + 1] = item
-                items[item.name] = item
-                successfulItems = successfulItems + 1
+
+                lootBySlot[currentLoot.slot] = lootBySlot[currentLoot.slot] or {}
+                lootBySlot[currentLoot.slot][currentLoot.itemID] = loot
+                lootByDungeon[dungeon.id][currentLoot.itemID] = loot
+                allLoot[currentLoot.itemID] = loot
             else
-                EMPLdb.lootIntegritySuccess = false
-            end
-        end
-        if successfulItems < numItems then
-            EMPLdb.lootIntegritySuccess = false
-        end
-    end
-    EMPLdb.lootByDungeon = itemsByDungeon
-    EMPLdb.lootBySlot = itemsBySlot
-    EMPLdb.loot = items
-    EMPLdb.loadedOnce = true
-end
-
-function LootTables:getMPlusLootDummy()
-    local _, _, playerClass = UnitClass("player")
-    local tmpSpec = GetSpecialization()
-    local playerSpecialization, _, _, _, _, _, _ = GetSpecializationInfo(tmpSpec)
-    local maxwait = 100000
-
-    EJ_ClearSearch()
-    C_EncounterJournal.ResetSlotFilter()
-    EJ_ResetLootFilter()
-
-    EJ_SetLootFilter(playerClass, playerSpecialization)
-    EJ_SetDifficulty(8)
-    C_EncounterJournal.SetPreviewMythicPlusLevel(EMPLdb.mythicPlusLevel)
-    for _, dungeon in pairs(EMPL.dungeonIDs) do
-        EJ_SelectInstance(dungeon.id)
-        local numItems = EJ_GetNumLoot()
-        for i = 1, numItems do
-            local currentItem = C_EncounterJournal.GetLootInfoByIndex(i)
-            local wait = 0
-            while currentItem.name == nil or currentItem.slot == nil do
-                wait = wait + 1
-                if wait > maxwait then
-                    currentItem = C_EncounterJournal.GetLootInfoByIndex(i)
-                    break
-                end
+                corruptData = true
             end
         end
     end
+
+    if not corruptData then
+        self.db.profile.loot[specId].lootByDungeon = lootByDungeon
+        self.db.profile.loot[specId].lootBySlot = lootBySlot
+        self.db.profile.loot[specId].allLoot = allLoot
+    end
+
+    self.db.profile.loot[specId].corruptData = corruptData
 end
 
-function LootTables:Reset()
-    EMPLdb.trackedLoot = {}
-    EMPLdb.lootIntegritySuccess = false
-    EMPLdb.loadedOnce = false
-    EMPLdb.lootByDungeon = nil
-    EMPLdb.lootBySlot = nil
-    EMPLdb.loot = nil
+function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentTry)
+    local specId = self.specId
+    currentTry = currentTry or 1
+    self:GenerateLootTables()
+
+    if not self.db.profile.loot[specId].corruptData then
+        self:Print(L["Fetch loot - "] .. L["success"])
+        return
+    elseif currentTry == 1 then
+        delay = 1
+        self:Print(L["Fetch loot - "] .. L["start"])
+    else
+        delay = delay + 5
+        self:Print(L["Fetch loot - "] .. L["waiting for another "] .. delay .. L[" seconds"])
+    end
+
+    if currentTry <= maxTries then
+        self:ScheduleTimer("TryGenerateLootTablesNTimes", delay, delay, maxTries, currentTry + 1)
+    else
+        self:Print(L["Fetch loot - "] .. L["failed"])
+    end
 end
 
-function LootTables:Init() 
-    LootTables:getMPlusLootDummy()
-    EMPLdb.lootByDungeon = EMPLdb.lootByDungeon or {}
-    EMPLdb.lootBySlot = EMPLdb.lootBySlot or {}
-    EMPLdb.loot = EMPLdb.loot or {}
-    EMPLdb.loadedOnce = true
+function EnhancedMPlusLoot:InitLootTables()
+    self.playerClassId = select(3, UnitClass("player"))
+
+    self.specNum = GetSpecialization()
+    local specNum = self.specNum
+
+    self.specId = GetSpecializationInfo(specNum)
+    local specId = self.specId
+
+    self.db.profile.loot[specId] = self.db.profile.loot[specId] or {}
+    self.db.profile.loot[specId].corruptData = self.db.profile.loot[specId].corruptData or true
+    self.db.profile.loot[specId].trackedLoot = self.db.profile.loot[specId].trackedLoot or {}
+
+    if self.db.profile.loot[specId].corruptData then
+        self:TryGenerateLootTablesNTimes(1, specId, 10)
+    end
+end
+
+function EnhancedMPlusLoot:ClearLootTables()
+    local specId = self.specId
+    self.db.profile.loot[specId] = {}
+    self.db.profile.loot[specId].corruptData = true
+end
+
+function EnhancedMPlusLoot:ClearTrackedLoot()
+    local specId = self.specId
+    self.db.profile.loot[specId].trackedLoot = {}
 end

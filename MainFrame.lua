@@ -1,276 +1,406 @@
-local _, EMPL = ...
-EMPL.MainFrame = {}
-local MainFrame = EMPL.MainFrame
-local mFrame
-local childFrameByDungeon
-local childFrameBySlot
-local frameWidth = 480
-local frameHeight = 600
+local AceGUI = LibStub("AceGUI-3.0")
+local L = EnhancedMPlusLoot.L
 
-function MainFrame:CreateFrame()
-    if EMPL.loaded == false then
+local filterLootBy = {
+    stamina = false,
+    strength = false,
+    agility = false,
+    intellect = false,
+    crit = false,
+    haste = false,
+    mastery = false,
+    versatility = false
+}
+
+function EnhancedMPlusLoot:applyFilters()
+    local lootContainerRows = EnhancedMPlusLoot.lootContainerRows
+    EnhancedMPlusLoot.scroll:SetScroll(0)
+    EnhancedMPlusLoot.scroll:DoLayout()
+    for _, row in pairs(lootContainerRows) do
+        if not row.isHeader then
+            local item = row.item
+            if filterLootBy.stamina and not item.hasStamina then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.strength and not item.hasStrength then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.agility and not item.hasAgility then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.intellect and not item.hasIntellect then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.crit and not item.hasCrit then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.haste and not item.hasHaste then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.mastery and not item.hasMastery then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            elseif filterLootBy.versatility and not item.hasVersatility then
+                row.frame:Hide()
+                row:SetHeight(1)
+                row:SetAutoAdjustHeight(true)
+            else
+                row.frame:Show()
+                row:SetAutoAdjustHeight(true)
+            end
+        end
+    end
+end
+
+function EnhancedMPlusLoot:CreateFilterContainer()
+    local filter = AceGUI:Create("SimpleGroup")
+    local checkboxwidth = 90
+    local buttonMargin = 20
+    local filterGroupWidth = 0.70
+    local byGroupWidth = 1 - filterGroupWidth
+
+    filter:SetLayout("Flow")
+    filter:SetFullWidth(true)
+
+    local filterGroup = AceGUI:Create("SimpleGroup")
+    filterGroup:SetRelativeWidth(filterGroupWidth)
+    filter:AddChild(filterGroup)
+
+    local byGroup = AceGUI:Create("SimpleGroup")
+    byGroup:SetRelativeWidth(byGroupWidth)
+    filter:AddChild(byGroup)
+
+    local divider = AceGUI:Create("Heading")
+    divider:SetFullWidth(true)
+    filter:AddChild(divider)
+
+    local mainstats = AceGUI:Create("SimpleGroup")
+    mainstats:SetFullWidth(true)
+    mainstats:SetLayout("Flow")
+    filterGroup:AddChild(mainstats)
+
+    local secondstats = AceGUI:Create("SimpleGroup")
+    secondstats:SetFullWidth(true)
+    secondstats:SetLayout("Flow")
+    filterGroup:AddChild(secondstats)
+
+    -- Filter buttons
+    -- Stam
+    local stamFilter = AceGUI:Create("CheckBox")
+    stamFilter:SetLabel(L["Stamina"])
+    stamFilter:SetWidth(checkboxwidth)
+    stamFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.stamina = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    mainstats:AddChild(stamFilter)
+
+    -- Str
+    local strFilter = AceGUI:Create("CheckBox")
+    strFilter:SetLabel(L["Strength"])
+    strFilter:SetWidth(checkboxwidth)
+    strFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.strength = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    mainstats:AddChild(strFilter)
+
+    -- Agi
+    local agiFilter = AceGUI:Create("CheckBox")
+    agiFilter:SetLabel(L["Agility"])
+    agiFilter:SetWidth(checkboxwidth)
+    agiFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.agility = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    mainstats:AddChild(agiFilter)
+
+    -- Int
+    local intFilter = AceGUI:Create("CheckBox")
+    intFilter:SetLabel(L["Intellect"])
+    intFilter:SetWidth(checkboxwidth + buttonMargin)
+    intFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.intellect = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    mainstats:AddChild(intFilter)
+
+    -- Crit
+    local critFilter = AceGUI:Create("CheckBox")
+    critFilter:SetLabel(L["Crit"])
+    critFilter:SetWidth(checkboxwidth)
+    critFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.crit = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    secondstats:AddChild(critFilter)
+
+    -- Haste
+    local hasteFilter = AceGUI:Create("CheckBox")
+    hasteFilter:SetLabel(L["Haste"])
+    hasteFilter:SetWidth(checkboxwidth)
+    hasteFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.haste = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    secondstats:AddChild(hasteFilter)
+
+    -- Mastery
+    local masteryFilter = AceGUI:Create("CheckBox")
+    masteryFilter:SetLabel(L["Mastery"])
+    masteryFilter:SetWidth(checkboxwidth)
+    masteryFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.mastery = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    secondstats:AddChild(masteryFilter)
+
+    -- Versa
+    local versaFilter = AceGUI:Create("CheckBox")
+    versaFilter:SetLabel(L["Versatility"])
+    versaFilter:SetWidth(checkboxwidth + buttonMargin)
+    versaFilter:SetCallback("OnValueChanged", function(_, _, value)
+        filterLootBy.versatility = value
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    secondstats:AddChild(versaFilter)
+
+    local buttonGroup = AceGUI:Create("SimpleGroup")
+    buttonGroup:SetFullWidth(true)
+    buttonGroup:SetLayout("Flow")
+    byGroup:AddChild(buttonGroup)
+
+    -- Buttons
+    local lootByDungeonButton = AceGUI:Create("Button")
+    lootByDungeonButton:SetText("Loot by Dungeon")
+    lootByDungeonButton:SetWidth(150)
+    lootByDungeonButton:SetCallback("OnClick", function()
+        EnhancedMPlusLoot.scroll:ReleaseChildren()
+        EnhancedMPlusLoot.lootContainer = {}
+        EnhancedMPlusLoot.lootContainer = EnhancedMPlusLoot:CreateLootContainer(true)
+        local lootContainer = EnhancedMPlusLoot.lootContainer
+        EnhancedMPlusLoot.scroll:AddChild(lootContainer)
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    buttonGroup:AddChild(lootByDungeonButton)
+
+    local lootBySlotButton = AceGUI:Create("Button")
+    lootBySlotButton:SetText("Loot by Slot")
+    lootBySlotButton:SetWidth(150)
+    lootBySlotButton:SetCallback("OnClick", function()
+        EnhancedMPlusLoot.scroll:ReleaseChildren()
+        EnhancedMPlusLoot.lootContainer = {}
+        EnhancedMPlusLoot.lootContainer = EnhancedMPlusLoot:CreateLootContainer(false)
+        local lootContainer = EnhancedMPlusLoot.lootContainer
+        EnhancedMPlusLoot.scroll:AddChild(lootContainer)
+        EnhancedMPlusLoot:applyFilters()
+    end)
+    buttonGroup:AddChild(lootBySlotButton)
+
+    return filter
+end
+
+EnhancedMPlusLoot.lootContainerRows = {}
+function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
+    local dividerFont = self.db.profile.mainDisplayDividerFont
+    local dividerFontPath = self:getFontPath(dividerFont)
+    local dividerFontFlags = self.db.profile.mainDisplayDividerFontFlags
+    local dividerFontSize = self.db.profile.mainDisplayDividerFontSize
+
+    local itemFont = self.db.profile.mainDisplayItemFont
+    local itemFontPath = self:getFontPath(itemFont)
+    local itemFontFlags = self.db.profile.mainDisplayItemFontFlags
+    local itemFontSize = self.db.profile.mainDisplayItemFontSize
+
+    local isByDungeon = true
+    if byDungeon == nil then
+        isByDungeon = true
+    else
+        isByDungeon = byDungeon
+    end
+    local specId = self.specId
+
+    local lootContainer = AceGUI:Create("SimpleGroup")
+    lootContainer:SetLayout("List")
+    lootContainer:SetFullWidth(true)
+    lootContainer:SetFullHeight(true)
+
+    local loot = {}
+    if isByDungeon then
+        loot = self.db.profile.loot[specId].lootByDungeon
+    else
+        loot = self.db.profile.loot[specId].lootBySlot
+    end
+    local i = 1
+    for _, loot in pairs(loot) do
+        local headerSet = false
+
+        for itemId, item in pairs(loot) do
+
+            -- HEADER ROW
+            if not headerSet then
+                local row = AceGUI:Create("SimpleGroup")
+                self.lootContainerRows[i] = row
+                row:SetFullWidth(true)
+                row:SetLayout("Flow")
+                lootContainer:AddChild(row)
+
+                local header = AceGUI:Create("Heading")
+                if isByDungeon then
+                    header:SetText(item.dungeonName)
+                else
+                    header:SetText(item.slot)
+                end
+                header:SetFullWidth(true)
+                header.label:SetFont(dividerFontPath, dividerFontSize, dividerFontFlags)
+                self.lootContainerRows[i]:AddChild(header)
+                self.lootContainerRows[i].isHeader = true
+
+                i = i + 1
+                headerSet = true
+            end
+
+            -- DATA ROW
+            local row = AceGUI:Create("SimpleGroup")
+            self.lootContainerRows[i] = row
+            row:SetFullWidth(true)
+            row:SetLayout("Flow")
+            lootContainer:AddChild(row)
+
+            self.lootContainerRows[i].isHeader = false
+            self.lootContainerRows[i].item = item
+
+            -- Track checkbox
+            local itemCheckbox = AceGUI:Create("CheckBox")
+            itemCheckbox:SetLabel("")
+            itemCheckbox:SetWidth(40)
+            itemCheckbox:SetCallback("OnEnter", function(widget, event, value)
+                GameTooltip:SetOwner(widget.frame, "ANCHOR_LEFT", 0, 0)
+                GameTooltip:SetText(L["Track"])
+                GameTooltip:Show()
+            end)
+            itemCheckbox:SetCallback("OnLeave", function(widget, event, value)
+                GameTooltip:Hide()
+            end)
+            itemCheckbox:SetCallback("OnValueChanged", function(widget, event, value)
+                if value then
+                    self.db.profile.loot[specId].trackedLoot[itemId] = item
+                else
+                    self.db.profile.loot[specId].trackedLoot[itemId] = nil
+                end
+
+                local lootFrame = self.lootFrame
+                self:HideLootFrame()
+                self:ShowLootFrame()
+            end)
+
+            itemCheckbox:SetValue(false)
+            local trackedLoot = self.db.profile.loot[specId].trackedLoot
+            if trackedLoot and trackedLoot[itemId] then
+                itemCheckbox:SetValue(true)
+            end
+            self.lootContainerRows[i]:AddChild(itemCheckbox)
+
+            -- Dungeon or slot
+            local dungeonOrSlot = AceGUI:Create("Label")
+            if isByDungeon then
+                dungeonOrSlot:SetText(item.slot)
+                dungeonOrSlot:SetWidth(100)
+            else
+                dungeonOrSlot:SetText(item.dungeonShortName)
+                dungeonOrSlot:SetWidth(50)
+            end
+            dungeonOrSlot:SetFont(itemFontPath, itemFontSize, itemFontFlags)
+            self.lootContainerRows[i]:AddChild(dungeonOrSlot)
+
+            -- Item icon and text
+            local itemLabel = AceGUI:Create("InteractiveLabel")
+            itemLabel:SetText(item.link)
+            itemLabel:SetCallback("OnEnter", function(widget, event, value)
+                GameTooltip:SetOwner(widget.frame, "ANCHOR_LEFT", 0, 0)
+                GameTooltip:SetHyperlink(item.link)
+                GameTooltip:Show()
+            end)
+            itemLabel:SetCallback("OnLeave", function(widget, event, value)
+                GameTooltip:Hide()
+            end)
+            itemLabel:SetCallback("OnClick", function(widget, event, value)
+                if IsModifiedClick("CHATLINK") then
+                    ChatEdit_InsertLink(item.link)
+                end
+            end)
+            itemLabel:SetWidth(300)
+            itemLabel:SetFont(itemFontPath, itemFontSize, itemFontFlags)
+            itemLabel:SetImage(item.icon)
+            itemLabel:SetImageSize(18, 18)
+            self.lootContainerRows[i]:AddChild(itemLabel)
+
+            i = i + 1
+        end
+    end
+
+    return lootContainer
+end
+
+EnhancedMPlusLoot.lootContainer = nil
+EnhancedMPlusLoot.scroll = nil
+EnhancedMPlusLoot.mainFrame = nil
+function EnhancedMPlusLoot:OpenMainFrame()
+    if self.mainFrame then
+        self.mainFrame:Release()
+        self.mainFrame = nil
         return
     end
-    mFrame = CreateFrame("Frame", "MythicPlusLootMainFrame", UIParent, "UIPanelDialogTemplate")
-    mFrame:SetSize(frameWidth, frameHeight)
-    mFrame:SetPoint("CENTER")
-    mFrame:SetMovable(true)
-    mFrame:EnableMouse(true)
-    mFrame:RegisterForDrag("LeftButton")
-    mFrame:SetScript("OnDragStart", mFrame.StartMoving)
-    mFrame:SetScript("OnDragStop", mFrame.StopMovingOrSizing)
-    mFrame:SetClampedToScreen(true)
-    mFrame:SetFrameStrata("DIALOG")
-    mFrame:Hide()
-
-    mFrame.optionsButton = CreateFrame("Button", "EMPLMainFrameConfigButton", mFrame, "UIPanelButtonTemplate")
-    mFrame.optionsButton:ClearAllPoints()
-    mFrame.optionsButton:SetPoint("TOPLEFT", mFrame, "TOPLEFT", frameWidth - 116, -5)
-    mFrame.optionsButton:SetSize(90, 18)
-    mFrame.optionsButton:SetText("Options")
-    mFrame.optionsButton:SetScript("OnClick", function()
-        EMPL.Config.Toggle()
+    -------------------------------------------------------------------------
+    -- Main Frame
+    -------------------------------------------------------------------------
+    EnhancedMPlusLoot.mainFrameOpen = true
+    local frame = AceGUI:Create("Window")
+    frame:SetTitle("Enhanced Mythic Plus Loot")
+    frame:SetCallback("OnClose", function(widget)
+        AceGUI:Release(widget)
+        EnhancedMPlusLoot.mainFrame = nil
     end)
-    mFrame.optionsButton:SetFrameLevel(4)
+    frame:SetLayout("Flow")
 
-    mFrame.sortByDungeon = CreateFrame("Button", "EMPLMainFrameSortByDungeonButton", mFrame, "UIPanelButtonTemplate")
-    mFrame.sortByDungeon:ClearAllPoints()
-    mFrame.sortByDungeon:SetPoint("TOPLEFT", mFrame, "TOPLEFT", 7, -5)
-    mFrame.sortByDungeon:SetSize(90, 18)
-    mFrame.sortByDungeon:SetText("By Dungeon")
-    mFrame.sortByDungeon:SetScript("OnClick", function()
-        childFrameBySlot:Hide()
-        mFrame.ScrollFrame:SetScrollChild(childFrameByDungeon)
-        childFrameByDungeon:Show()
-        EMPLdb.byDungeonSelected = true
-    end)
-    mFrame.sortByDungeon:SetFrameLevel(4)
+    -- Fix close button position
+    frame.closebutton:SetPoint("TOPRIGHT", -2, -3)
+    -- frame:SetHeight(600)
 
-    mFrame.sortBySlot = CreateFrame("Button", "EMPLMainFrameSortBySlotButton", mFrame, "UIPanelButtonTemplate")
-    mFrame.sortBySlot:ClearAllPoints()
-    mFrame.sortBySlot:SetPoint("TOPLEFT", mFrame, "TOPLEFT", 94, -5)
-    mFrame.sortBySlot:SetSize(90, 18)
-    mFrame.sortBySlot:SetText("By Slot")
-    mFrame.sortBySlot:SetScript("OnClick", function()
-        childFrameByDungeon:Hide()
-        mFrame.ScrollFrame:SetScrollChild(childFrameBySlot)
-        childFrameBySlot:Show()
-        EMPLdb.byDungeonSelected = false
-    end)
-    mFrame.sortBySlot:SetFrameLevel(4)
+    -- Fix visibility
+    local dialogbg = frame.frame:CreateTexture(nil, "BACKGROUND")
+    dialogbg:SetTexture(137056)
+    dialogbg:SetPoint("TOPLEFT", 8, -24)
+    dialogbg:SetPoint("BOTTOMRIGHT", -6, 8)
+    dialogbg:SetVertexColor(0, 0, 0, .3)
 
-    mFrame.getData = CreateFrame("Button", "EMPLMainFrameGetDataButton", mFrame, "UIPanelButtonTemplate")
-    mFrame.getData:ClearAllPoints()
-    mFrame.getData:SetPoint("TOPLEFT", mFrame, "TOPLEFT", 94 + 83, -5)
-    mFrame.getData:SetSize(90, 18)
-    mFrame.getData:SetText("Get Data")
-    mFrame.getData:SetScript("OnClick", function()
-        childFrameByDungeon:Hide()
-        childFrameBySlot:Hide()
-        EMPL.LootTables:getMPlusLoot(true)
-        EMPL.MainFrame:Update()
-        EMPL.GroupFinderFrame:Update()
-        childFrameByDungeon:Show()
-    end)
-    mFrame.sortBySlot:SetFrameLevel(4)
+    -------------------------------------------------------------------------
+    -- Filter container
+    -------------------------------------------------------------------------
+    local filter = self:CreateFilterContainer()
+    frame:AddChild(filter)
 
-    mFrame.ScrollFrame = CreateFrame("ScrollFrame", "EMPLMainFrameScrollFrame", mFrame, "UIPanelScrollFrameTemplate")
-    mFrame.ScrollFrame:SetPoint("TOPLEFT", mFrame, "TOPLEFT", 0, -30)
-    mFrame.ScrollFrame:SetPoint("BOTTOMRIGHT", mFrame, "BOTTOMRIGHT", -5, 8)
-    mFrame.ScrollFrame:SetClipsChildren(true)
-    mFrame.ScrollFrame:EnableMouseWheel(true)
-    mFrame.ScrollFrame:SetScript("OnMouseWheel", function(self, delta)
-        local newValue = self:GetVerticalScroll() - (delta * 30)
-        if newValue < 0 then
-            newValue = 0
-        elseif newValue > self:GetVerticalScrollRange() then
-            newValue = self:GetVerticalScrollRange()
-        end
-        self:SetVerticalScroll(newValue)
-    end)
+    local scrollcontainer = AceGUI:Create("SimpleGroup")
+    scrollcontainer:SetFullWidth(true)
+    scrollcontainer:SetFullHeight(true)
+    scrollcontainer:SetLayout("Fill")
+    frame:AddChild(scrollcontainer)
 
-    mFrame.ScrollFrame.ScrollBar:ClearAllPoints()
-    mFrame.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", mFrame.ScrollFrame, "TOPRIGHT", -20, -20)
-    mFrame.ScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", mFrame.ScrollFrame, "BOTTOMRIGHT", -20, 20)
+    EnhancedMPlusLoot.scroll = AceGUI:Create("ScrollFrame")
+    local scroll = EnhancedMPlusLoot.scroll
+    scroll:SetLayout("Flow")
+    scrollcontainer:AddChild(scroll)
 
-    childFrameByDungeon = MainFrame:generateChildFrame(EMPLdb.lootByDungeon, true)
-    childFrameBySlot = MainFrame:generateChildFrame(EMPLdb.lootBySlot, false)
-    mFrame.ScrollFrame:SetScrollChild(childFrameByDungeon)
-    return mFrame
+    EnhancedMPlusLoot.lootContainer = self:CreateLootContainer(true)
+    local lootContainer = EnhancedMPlusLoot.lootContainer
+    scroll:AddChild(lootContainer)
+
+    self.mainFrame = frame
 end
-
-function MainFrame:generateChildFrame(lootTable, byDungeon)
-    local childFrame = CreateFrame("Frame", "EMPLMainFrameChildFrame", mFrame.ScrollFrame)
-    childFrame:Hide()
-    local childFrameSize = 0
-    local childFrameSizeDefault = 100
-    childFrame:SetSize(frameWidth - 40, childFrameSizeDefault)
-
-    if lootTable == nil then
-        local noDataString = mFrame.CreateFontString(childFrame, "overlay")
-        noDataString:SetFontObject("GameFontNormalLarge")
-        noDataString:SetJustifyH("LEFT")
-        noDataString:SetPoint("CENTER", childFrame, "CENTER", 0, 0)
-        noDataString:SetTextColor(1, 1, 1, 1)
-        noDataString:SetText("No data available. Try 'Get Data' ;)")
-        return childFrame
-    end
-
-    local offsetY = -12
-    local offsetX = 20
-    local itemOffsetX = 20
-    local itemHeight = 30
-    local headerHeight = 35
-    for key, items in pairs(lootTable) do
-        if not EMPLdb.lootIntegritySuccess then
-            local dataIntegrityString = mFrame.CreateFontString(childFrame, "overlay")
-            dataIntegrityString:SetFontObject("GameFontNormalLarge")
-            dataIntegrityString:SetJustifyH("LEFT")
-            dataIntegrityString:SetPoint("TOP", childFrame, "TOP", 5, -30)
-            dataIntegrityString:SetTextColor(1, 0, 0, 1)
-            dataIntegrityString:SetText("Data not fetched completely. Hit 'Get Data' again.")
-            offsetY = offsetY - 60
-        end
-
-        childFrameSize = childFrameSize + headerHeight + (#items * itemHeight) + 10
-        local dungeonString = mFrame.CreateFontString(childFrame, "overlay")
-        dungeonString:SetFontObject("GameFontNormalLarge")
-        dungeonString:SetJustifyH("LEFT")
-        dungeonString:SetPoint("TOPLEFT", childFrame, "TOPLEFT", offsetX, offsetY)
-        dungeonString:SetTextColor(1, 1, 1, 1)
-        dungeonString:SetText(key)
-        offsetY = offsetY - headerHeight
-
-        for _, item in pairs(items) do
-            local containerFrame = CreateFrame("Frame", "EMPLMainFrameContainerFrameItem" .. tostring(item.id),
-                childFrame)
-            local firstItemOffset = 24
-            local secondItemOffset = firstItemOffset + 90
-            local thirdItemOffset = secondItemOffset + 30
-
-            local checkbox = CreateFrame("CheckButton",
-                "EMPLMainFrameContainerFrameItem" .. tostring(item.id) .. "Checkbox", containerFrame,
-                "UICheckButtonTemplate")
-            checkbox:SetPoint("TOPLEFT", childFrame, "TOPLEFT", offsetX + itemOffsetX, offsetY)
-            checkbox:SetSize(20, 20)
-            checkbox:SetScript("OnClick", function(self)
-                if self:GetChecked() then
-                    EMPLdb.trackedLoot[item.name] = true
-                else
-                    EMPLdb.trackedLoot[item.name] = false
-                end
-                EMPL.GroupFinderFrame:Update()
-                if byDungeon then
-                    childFrameBySlot = MainFrame:generateChildFrame(EMPLdb.lootBySlot, false)
-                else
-                    childFrameByDungeon = MainFrame:generateChildFrame(EMPLdb.lootByDungeon, true)
-                end
-            end)
-            local checked = false
-            if EMPLdb.trackedLoot and EMPLdb.trackedLoot[item.name] then
-                checked = EMPLdb.trackedLoot[item.name]
-            end
-            checkbox:SetChecked(checked)
-
-            local itemSlot = mFrame.CreateFontString(containerFrame, "overlay")
-            itemSlot:SetFontObject("GameFontNormal")
-            itemSlot:SetJustifyH("LEFT")
-            itemSlot:SetFont("Fonts\\FRIZQT__.TTF", 13, "OUTLINE")
-            itemSlot:SetPoint("TOPLEFT", childFrame, "TOPLEFT", offsetX + itemOffsetX + firstItemOffset, offsetY - 2)
-            itemSlot:SetTextColor(1, 1, 1, 1)
-            if byDungeon then
-                itemSlot:SetText(item.slot)
-            else
-                itemSlot:SetText(item.dungeonShortName)
-                secondItemOffset = secondItemOffset - 50
-                thirdItemOffset = thirdItemOffset - 50
-            end
-
-            local icon = GetItemIcon(item.id);
-            local itemIcon = CreateFrame("Frame", "EMPLIcon" .. tostring(item.id), containerFrame);
-            itemIcon:SetPoint("TOPLEFT", childFrame, "TOPLEFT", offsetX + itemOffsetX + secondItemOffset, offsetY)
-            itemIcon:SetSize(20, 20)
-            itemIcon.texture = itemIcon:CreateTexture()
-            itemIcon.texture:SetAllPoints()
-            itemIcon.texture:SetTexture(icon)
-            itemIcon:SetScript("OnEnter", function()
-                GameTooltip:SetOwner(itemIcon, "ANCHOR_BOTTOMRIGHT", 15, 15);
-                GameTooltip:SetHyperlink(item.link);
-                GameTooltip:Show();
-            end)
-            itemIcon:SetScript("OnLeave", function()
-                GameTooltip:Hide();
-            end)
-
-            local itemString = mFrame.CreateFontString(containerFrame, "overlay")
-            itemString:SetFontObject("GameFontNormal")
-            itemString:SetFont("Fonts\\FRIZQT__.TTF", 13, "OUTLINE")
-            itemString:SetJustifyH("LEFT")
-            itemString:SetPoint("TOPLEFT", childFrame, "TOPLEFT", offsetX + itemOffsetX + thirdItemOffset, offsetY - 2)
-            itemString:SetTextColor(1, 1, 1, 1)
-            itemString:SetText(item.link)
-
-            itemString:SetScript("OnEnter", function()
-                GameTooltip:SetOwner(itemString, "ANCHOR_BOTTOMRIGHT", 15, 15);
-                GameTooltip:SetHyperlink(item.link);
-                GameTooltip:Show();
-            end)
-            itemString:SetScript("OnLeave", function()
-                GameTooltip:Hide();
-            end)
-
-            offsetY = offsetY - itemHeight
-        end
-        offsetY = offsetY + itemHeight - headerHeight
-    end
-    if childFrameSize > childFrameSizeDefault then
-        childFrame:SetSize(frameWidth - 40, childFrameSize)
-    end
-    return childFrame
-end
-
-function MainFrame:DestroyChildren() 
-    childFrameByDungeon:Hide()
-    childFrameByDungeon = {}
-
-    childFrameBySlot:Hide()
-    childFrameBySlot = {}
-end
-
-function MainFrame:Update()
-    childFrameByDungeon = MainFrame:generateChildFrame(EMPLdb.lootByDungeon, true)
-    childFrameBySlot = MainFrame:generateChildFrame(EMPLdb.lootBySlot, false)
-    if mFrame:IsShown() then
-        if EMPLdb.byDungeonSelected then
-            mFrame.ScrollFrame:SetScrollChild(childFrameByDungeon)
-            childFrameByDungeon:Show()
-        else
-            mFrame.ScrollFrame:SetScrollChild(childFrameBySlot)
-            childFrameBySlot:Show()
-        end
-    end
-end
-
-function MainFrame:Toggle()
-    local frame = mFrame or MainFrame:CreateFrame()
-    frame:SetShown(not frame:IsShown())
-    if frame:IsShown() then
-        if EMPLdb.byDungeonSelected then
-            mFrame.ScrollFrame:SetScrollChild(childFrameByDungeon)
-            childFrameByDungeon:Show()
-        else
-            mFrame.ScrollFrame:SetScrollChild(childFrameBySlot)
-            childFrameBySlot:Show()
-        end
-    else
-        childFrameByDungeon:Hide()
-        childFrameBySlot:Hide()
-
-    end
-end
-
-function MainFrame:Init()
-    local frame = mFrame or MainFrame:CreateFrame()
-    EMPLdb.byDungeonSelected = EMPLdb.byDungeonSelected or true
-end
-

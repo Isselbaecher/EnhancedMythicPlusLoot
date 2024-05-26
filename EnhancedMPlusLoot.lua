@@ -1,53 +1,35 @@
-local _, EMPL = ...
-EMPL.loaded = false
+---@class EnhancedMPlusLoot: AceAddon, AceConsole-3.0, AceEvent-3.0, AceGUI-3.0, AceTimer-3.0, AceHook-3.0
+EnhancedMPlusLoot = LibStub("AceAddon-3.0"):NewAddon("EnhancedMPlusLoot", "AceConsole-3.0", "AceEvent-3.0",
+    "AceTimer-3.0", "AceHook-3.0")
+EnhancedMPlusLoot.L = LibStub("AceLocale-3.0"):GetLocale("EnhancedMPlusLoot")
 
-SLASH_ENHANCEDMYTHICPLUSLOOT1 = "/empl"
-SlashCmdList.ENHANCEDMYTHICPLUSLOOT = EMPL.MainFrame.Toggle
-
-SLASH_FRAMESTK1 = "/fs"
-SlashCmdList.FRAMESTK = function()
-    LoadAddOn("Blizzard_DebugTools")
-    FrameStackTooltip_Toggle()
+function EnhancedMPlusLoot:InitMinimapIcon()
+    local icon = LibStub("LibDBIcon-1.0")
+    local EnhancedMPlusLootLDB = LibStub("LibDataBroker-1.1"):NewDataObject("EnhancedMPlusLoot", {
+        type = "data source",
+        text = "EnhancedMPlusLoot",
+        icon = "Interface\\Addons\\EnhancedMPlusLoot\\images\\EMPL",
+        OnClick = function()
+			self:OpenMainFrame()
+        end
+    })
+    icon:Register("EnhancedMPlusLoot", EnhancedMPlusLootLDB, self.db.profile.minimap)
 end
 
-SLASH_RELOADUI1 = "/rl"
-SlashCmdList.RELOADUI = ReloadUI
-
-local enteredWorld = false
-local addonLoaded = false
-
-local function OnEvent(self, event, arg1, arg2)
-    local playerSpecChanged = false
-    local reloaded = false
-    if (event == "PLAYER_ENTERING_WORLD") and arg1 then
-        f:UnregisterEvent("PLAYER_ENTERING_WORLD")
-        enteredWorld = true
-    elseif (event == "PLAYER_ENTERING_WORLD") and arg2 then
-        f:UnregisterEvent("PLAYER_ENTERING_WORLD")
-        reloaded = true
-    elseif (event == "ADDON_LOADED") and (arg1 == "EnhancedMPlusLoot") then
-        f:UnregisterEvent("ADDON_LOADED")
-        addonLoaded = true
-    elseif (event == "PLAYER_SPECIALIZATION_CHANGED") and EMPL.loaded then
-        playerSpecChanged = true
-        EMPL.Config:Initialize()
-        EMPL.LootTables:getMPlusLootDummy()
-        EMPL.LootTables:getMPlusLoot()
-        EMPL.MainFrame:Update()
-        EMPL.GroupFinderFrame:Update()
-    end
-
-    if (enteredWorld and addonLoaded and not playerSpecChanged) or (reloaded and addonLoaded) then
-        EMPL.loaded = true
-        EMPL.Config:Initialize()
-        EMPL.LootTables:getMPlusLootDummy()
-        EMPL.MainFrame:Init()
-        EMPL.GroupFinderFrame:Toggle()
-    end
+function EnhancedMPlusLoot:OnInitialize()
+    self:InitSlashCommands()
+    self:InitDb()
+	self:InitMinimapIcon()
 end
 
-f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
-f:RegisterEvent("PLAYER_ENTERING_WORLD")
-f:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-f:SetScript("OnEvent", OnEvent)
+function EnhancedMPlusLoot:OnEnable()
+    self:InitOptions()
+    self:InitLootTables()
+    self:HookLootFrame()
+	self:RegisterLootNotification()
+end
+
+function EnhancedMPlusLoot:OnDisable()
+    self:UnhookAll()
+end
+
