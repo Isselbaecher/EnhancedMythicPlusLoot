@@ -1,5 +1,4 @@
 package-as: EnhancedMPlusLoot
-manual-changelog: CHANGELOG.txt
 license-output: LICENSE.txt
 externals: 
   libs/LibStub:
@@ -11,7 +10,7 @@ externals:
     tag: latest
 
   libs/LibDataBroker-1.1: 
-    url: https://repos.curseforge.com/wow/libdatabroker-1-1
+    url: https://github.com/tekkub/libdatabroker-1-1
     
   libs/LibDBIcon-1.0: 
     url: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
@@ -49,7 +48,7 @@ externals:
     tag: latest
 
   libs/AceGUI-3.0-SharedMediaWidgets:
-    url: https://repos.wowace.com/wow/ace-gui-3-0-shared-media-widgets/trunk/AceGUI-3.0-SharedMediaWidgets/
+    url: https://repos.wowace.com/wow/ace-gui-3-0-shared-media-widgets/trunk/AceGUI-3.0-SharedMediaWidgets
     tag: latest
 
   libs/AceLocale-3.0:
