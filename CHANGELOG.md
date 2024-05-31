@@ -1,3 +1,7 @@
+# 0.2.5-Release
+## What's Changed
+* Added position saving for main window
+
 # 0.2.4-Release
 ## What's Changed
 * Bugfix library load order
