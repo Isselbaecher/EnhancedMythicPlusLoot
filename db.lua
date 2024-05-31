@@ -16,6 +16,8 @@ local defaults = {
         mainDisplayDividerFontFlags = "OUTLINE",
         mainDisplayDividerFontSize = 12,
 
+        mainFrameStatus = {},
+
         -- Loot Tracker
         lootTrackerDislpayIcons = true,
 

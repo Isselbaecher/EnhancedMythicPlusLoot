@@ -296,7 +296,6 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
                     self.db.profile.loot[specId].trackedLoot[itemId] = nil
                 end
 
-                local lootFrame = self.lootFrame
                 self:HideLootFrame()
                 self:ShowLootFrame()
             end)
@@ -349,6 +348,15 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
     return lootContainer
 end
 
+function EnhancedMPlusLoot:UpdateMainFrame()
+    if not self.mainFrame then
+        return
+    end
+    self.mainFrame:Release()
+    self.mainFrame = nil
+    self:OpenMainFrame()
+end
+
 EnhancedMPlusLoot.lootContainer = nil
 EnhancedMPlusLoot.scroll = nil
 EnhancedMPlusLoot.mainFrame = nil
@@ -361,10 +369,16 @@ function EnhancedMPlusLoot:OpenMainFrame()
     -------------------------------------------------------------------------
     -- Main Frame
     -------------------------------------------------------------------------
-    EnhancedMPlusLoot.mainFrameOpen = true
-    local frame = AceGUI:Create("Window")
+    self.mainFrame = AceGUI:Create("Window")
+    local frame = self.mainFrame
+    local status = self.db.profile.mainFrameStatus
+    frame:SetStatusTable(status)
+
     frame:SetTitle("Enhanced Mythic Plus Loot")
     frame:SetCallback("OnClose", function(widget)
+        local status = self.db.profile.mainFrameStatus
+        status.width = widget.frame:GetWidth()
+        status.height = widget.frame:GetHeight()
         AceGUI:Release(widget)
         EnhancedMPlusLoot.mainFrame = nil
     end)
@@ -393,14 +407,12 @@ function EnhancedMPlusLoot:OpenMainFrame()
     scrollcontainer:SetLayout("Fill")
     frame:AddChild(scrollcontainer)
 
-    EnhancedMPlusLoot.scroll = AceGUI:Create("ScrollFrame")
+    self.scroll = AceGUI:Create("ScrollFrame")
     local scroll = EnhancedMPlusLoot.scroll
     scroll:SetLayout("Flow")
     scrollcontainer:AddChild(scroll)
 
-    EnhancedMPlusLoot.lootContainer = self:CreateLootContainer(true)
-    local lootContainer = EnhancedMPlusLoot.lootContainer
+    self.lootContainer = self:CreateLootContainer(true)
+    local lootContainer = self.lootContainer
     scroll:AddChild(lootContainer)
-
-    self.mainFrame = frame
 end

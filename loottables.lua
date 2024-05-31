@@ -45,12 +45,23 @@ local statMapping = {
     ["ITEM_MOD_VERSATILITY"] = "hasVersatility"
 }
 
-function EnhancedMPlusLoot:getLootTables()
-    self:Print("TODO getLootTables")
+function EnhancedMPlusLoot:ReloadLootTables()
+    self:DeleteDungeonLootTables()
+    self:InitLootTables()
 end
 
-function EnhancedMPlusLoot:deleteLootTables()
-    self:Print("TODO deleteLootTables")
+function EnhancedMPlusLoot:DeleteDungeonLootTables()
+    local specId = self.specId
+    self.db.profile.loot[specId].corruptData = true
+    self.db.profile.loot[specId].lootByDungeon = {}
+    self.db.profile.loot[specId].lootBySlot = {}
+    self.db.profile.loot[specId].allLoot = {}
+    self:UpdateMainFrame()
+end
+
+function EnhancedMPlusLoot:DeleteTrackedLootTables()
+    local specId = self.specId
+    self.db.profile.loot[specId].trackedLoot = {}
 end
 
 function EnhancedMPlusLoot:GenerateLootTables()
@@ -131,6 +142,7 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
 
     if not self.db.profile.loot[specId].corruptData then
         self:Print(L["Fetch loot - "] .. L["success"])
+        self:UpdateMainFrame()
         return
     elseif currentTry == 1 then
         delay = 1
@@ -161,17 +173,7 @@ function EnhancedMPlusLoot:InitLootTables()
     self.db.profile.loot[specId].trackedLoot = self.db.profile.loot[specId].trackedLoot or {}
 
     if self.db.profile.loot[specId].corruptData then
+        self:CancelAllTimers()
         self:TryGenerateLootTablesNTimes(1, specId, 10)
     end
-end
-
-function EnhancedMPlusLoot:ClearLootTables()
-    local specId = self.specId
-    self.db.profile.loot[specId] = {}
-    self.db.profile.loot[specId].corruptData = true
-end
-
-function EnhancedMPlusLoot:ClearTrackedLoot()
-    local specId = self.specId
-    self.db.profile.loot[specId].trackedLoot = {}
 end

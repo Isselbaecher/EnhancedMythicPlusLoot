@@ -25,14 +25,12 @@ local menu = {
             desc = L["Enable the loot tracker window."],
             type = "toggle",
             order = 1,
-            width = "full"
         },
         trackedLootPopupEnabled = {
             name = L["Tracked loot popup"],
             desc = L["Enable the tracked loot popup."],
             type = "toggle",
             order = 2,
-            width = "full"
         },
         mythicPlusLevel = {
             name = L["Mythic+ Level"],
@@ -194,7 +192,27 @@ local menu = {
                     }
                 }
             }
-        }
+        },
+        resetTrackedLootTables = {
+            name = L["Reset tracked loot"],
+            desc = L["Reset tracked loot"],
+            confirm = true,
+            type = "execute",
+            func = function()
+                EnhancedMPlusLoot:DeleteTrackedLootTables()
+            end,
+            order = 4,
+        },
+        reloadLootTables = {
+            name = L["Reload dungeon loot"],
+            desc = L["Reloads the dungeon loot tables from the adventure journal"],
+            confirm = true,
+            type = "execute",
+            order = 4,
+            func = function()
+                EnhancedMPlusLoot:ReloadLootTables()
+            end
+        },
     }
 }
 
