@@ -1,3 +1,7 @@
+# 0.2.4-Release
+## What's Changed
+* Bugfix library load order
+
 # 0.2.3-Release
 ## What's Changed
 * Rework in Ace3
