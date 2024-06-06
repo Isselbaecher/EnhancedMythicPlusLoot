@@ -1,3 +1,7 @@
+# 0.3.1-Release
+## What's Changed
+* Added current season as default in db
+
 # 0.3.0-Release
 ## What's Changed
 * Added TWW S1 to loot pool
