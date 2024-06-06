@@ -354,13 +354,13 @@ function EnhancedMPlusLoot:UpdateMainFrame()
     end
     self.mainFrame:Release()
     self.mainFrame = nil
-    self:OpenMainFrame()
+    self:ToggleMainFrame()
 end
 
 EnhancedMPlusLoot.lootContainer = nil
 EnhancedMPlusLoot.scroll = nil
 EnhancedMPlusLoot.mainFrame = nil
-function EnhancedMPlusLoot:OpenMainFrame()
+function EnhancedMPlusLoot:ToggleMainFrame()
     if self.mainFrame then
         self.mainFrame:Release()
         self.mainFrame = nil

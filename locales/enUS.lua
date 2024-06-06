@@ -84,3 +84,9 @@ L["Mast"] = true
 L["Versatility"] = true
 
 L["Track"] = true
+
+-- Minimap
+L["Left-click"] = true
+L["Right-click"] = true
+L["to toggle the main frame"] = true
+L["to toggle the options menu"] = true

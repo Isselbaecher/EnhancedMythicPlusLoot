@@ -239,7 +239,11 @@ function EnhancedMPlusLoot:InitOptions()
     self.menu = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("EnhancedMPlusLoot", "EnhancedMPlusLoot")
 end
 
-function EnhancedMPlusLoot:OpenMenu()
-    InterfaceOptionsFrame_OpenToCategory(self.menu)
-    InterfaceOptionsFrame_OpenToCategory(self.menu)
+function EnhancedMPlusLoot:ToggleMenu()
+    local acd = LibStub("AceConfigDialog-3.0")
+    if acd.OpenFrames["EnhancedMPlusLoot"] then
+        acd:Close("EnhancedMPlusLoot")
+    else
+        acd:Open("EnhancedMPlusLoot")
+    end
 end

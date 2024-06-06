@@ -1,3 +1,8 @@
+# 0.3.3-Release
+## What's Changed
+* Prettify minimap button
+* Re-enabled slash command to open options
+
 # 0.3.2-Release
 ## What's Changed
 * Added option to hide minimap
