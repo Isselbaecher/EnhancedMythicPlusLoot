@@ -1,3 +1,9 @@
+# 0.3.0-Release
+## What's Changed
+* Added TWW S1 to loot pool
+* Added dynamic season discovery
+* Added funtctionality to display incomplete loot queries (the addon will try to complete the data query in the background)
+
 # 0.2.5-Release
 ## What's Changed
 * Added position saving for main window

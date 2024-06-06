@@ -11,7 +11,7 @@ end
 
 function EnhancedMPlusLoot:CreateLootFrame()
     local frameWidth = 390
-    local dungeonWidth = 40
+    local dungeonWidth = 50
     local itemWidth = frameWidth - dungeonWidth - 30
 
     -- Loot Frame

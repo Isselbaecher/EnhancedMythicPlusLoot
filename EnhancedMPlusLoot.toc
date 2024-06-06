@@ -1,6 +1,6 @@
-## Interface: 100207
+## Interface: 100207,110000
 ## Title: EnhancedMPlusLoot
-## Version: 0.2.4
+## Version: @project-version@
 ## Notes: Enhances M+ Loot Interface
 ## Author: Supersoaker of Eredar [EU]
 ## IconTexture: Interface\Addons\EnhancedMPlusLoot\images\EMPL
@@ -13,6 +13,7 @@ EnhancedMPlusLoot.lua
 util.lua
 db.lua
 options.lua
+dungeonids.lua
 loottables.lua
 slashcommands.lua
 mainframe.lua

@@ -1,38 +1,5 @@
 local L = EnhancedMPlusLoot.L
-
-local dungeonIDs = {{
-    shortName = L["NO"],
-    fullName = L["Nokhud Offensive"],
-    id = 1198
-}, {
-    shortName = L["AA"],
-    fullName = L["Algethar Academy"],
-    id = 1201
-}, {
-    shortName = L["RLP"],
-    fullName = L["Ruby Life Pools"],
-    id = 1202
-}, {
-    shortName = L["AV"],
-    fullName = L["Azure Vault"],
-    id = 1203
-}, {
-    shortName = L["NEL"],
-    fullName = L["Neltharus"],
-    id = 1199
-}, {
-    shortName = L["BH"],
-    fullName = L["Brackenhide Hollow"],
-    id = 1196
-}, {
-    shortName = L["HOI"],
-    fullName = L["Halls of Infusion"],
-    id = 1204
-}, {
-    shortName = L["ULD"],
-    fullName = L["Uldaman"],
-    id = 1197
-}}
+local dungeonIDs = {}
 
 local statMapping = {
     ["ITEM_MOD_STAMINA_SHORT"] = "hasStamina",
@@ -44,6 +11,8 @@ local statMapping = {
     ["ITEM_MOD_MASTERY_RATING_SHORT"] = "hasMastery",
     ["ITEM_MOD_VERSATILITY"] = "hasVersatility"
 }
+
+local numScans = 5;
 
 function EnhancedMPlusLoot:ReloadLootTables()
     self:DeleteDungeonLootTables()
@@ -92,6 +61,7 @@ function EnhancedMPlusLoot:GenerateLootTables()
         for i = 1, numLoot do
             local currentLoot = C_EncounterJournal.GetLootInfoByIndex(i)
             local lootStats = C_Item.GetItemStats("item:" .. tostring(currentLoot.itemID))
+
             if currentLoot.name ~= nil and currentLoot.slot ~= nil and currentLoot.slot ~= '' then
                 local loot = {
                     name = currentLoot.name,
@@ -126,11 +96,9 @@ function EnhancedMPlusLoot:GenerateLootTables()
         end
     end
 
-    if not corruptData then
-        self.db.profile.loot[specId].lootByDungeon = lootByDungeon
-        self.db.profile.loot[specId].lootBySlot = lootBySlot
-        self.db.profile.loot[specId].allLoot = allLoot
-    end
+    self.db.profile.loot[specId].lootByDungeon = lootByDungeon
+    self.db.profile.loot[specId].lootBySlot = lootBySlot
+    self.db.profile.loot[specId].allLoot = allLoot
 
     self.db.profile.loot[specId].corruptData = corruptData
 end
@@ -160,6 +128,8 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
 end
 
 function EnhancedMPlusLoot:InitLootTables()
+    C_MythicPlus.RequestMapInfo()
+
     self.playerClassId = select(3, UnitClass("player"))
 
     self.specNum = GetSpecialization()
@@ -172,8 +142,20 @@ function EnhancedMPlusLoot:InitLootTables()
     self.db.profile.loot[specId].corruptData = self.db.profile.loot[specId].corruptData or true
     self.db.profile.loot[specId].trackedLoot = self.db.profile.loot[specId].trackedLoot or {}
 
+    local seasonId = C_MythicPlus.GetCurrentSeason()
+    local dbSeasonId = self.db.profile.currentSeasonId
+    if dbSeasonId < seasonId then
+        self:Print("Old M+ SeasonID: " .. dbSeasonId)
+        self.db.profile.currentSeasonId = seasonId
+        dbSeasonId = seasonId
+        self:Print("New M+ SeasonID: " .. seasonId)
+        self:DeleteTrackedLootTables()
+        self:DeleteDungeonLootTables()
+    end
+
+    dungeonIDs = EnhancedMPlusLoot.dungeonIDs[dbSeasonId]
     if self.db.profile.loot[specId].corruptData then
         self:CancelAllTimers()
-        self:TryGenerateLootTablesNTimes(1, specId, 10)
+        self:TryGenerateLootTablesNTimes(1, specId, numScans)
     end
 end
