@@ -7,14 +7,14 @@ function EnhancedMPlusLoot:RunSlashCommand(command)
         self:DeleteTrackedLootTables()
     elseif command == "getloot" then
         self:ReloadLootTables()
-    elseif command == "config" then
-        self:OpenMenu()
+    --elseif command == "config" then
+    --    self:OpenMenu()
     elseif command == "" then
         self:OpenMainFrame()
     else
         local helpmessage = "Usage: /epml [" .. L["command"] .. "]\n"
         --helpmessage= helpmessage .. "tracker - " .. L["toggle loot tracker"] .. "\n"
-        helpmessage= helpmessage .. "config - " .. L["open settings"] .. "\n"
+        --helpmessage= helpmessage .. "config - " .. L["open settings"] .. "\n"
         helpmessage= helpmessage .. "getloot - " .. L["refresh loot tables"] .. "\n"
         helpmessage= helpmessage .. "cleartracked - " .. L["clear tracked loot table"] .. "\n"
         self:Print(helpmessage)

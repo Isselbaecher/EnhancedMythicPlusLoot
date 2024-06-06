@@ -1,3 +1,8 @@
+# 0.3.2-Release
+## What's Changed
+* Added option to hide minimap
+* Disabled slash command to open options (problems with TWW)
+
 # 0.3.1-Release
 ## What's Changed
 * Added current season as default in db

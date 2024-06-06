@@ -7,6 +7,7 @@ local fontFlags = {
     ["OUTLINE , MONOCHROME"] = L["Monochrome Outline"],
     ["THICKOUTLINE , MONOCHROME"] = L["Monochrome Thick Outline"]
 }
+local icon = LibStub("LibDBIcon-1.0")
 
 local menu = {
     name = "EnhancedMPlusLoot",
@@ -20,6 +21,23 @@ local menu = {
     end,
     childGroups = "tab",
     args = {
+        minimap = {
+            name = L["Hide minimap icon"],
+            desc = L["Hides the minimap icon."],
+            type = "toggle",
+            order = 1,
+            get = function()
+                return EnhancedMPlusLoot.db.profile.minimap.hide
+            end,
+            set = function(_, val)
+                EnhancedMPlusLoot.db.profile.minimap.hide = val
+                if val then
+                    icon:Hide("EnhancedMPlusLoot")
+                else
+                    icon:Show("EnhancedMPlusLoot")
+                end
+            end
+        },
         lootTrackerWindowEnabled = {
             name = L["Loot tracker window"],
             desc = L["Enable the loot tracker window."],
