@@ -1,3 +1,7 @@
+# 0.3.3.1-Release
+## What's Changed
+* Code cleanup
+
 # 0.3.3-Release
 ## What's Changed
 * Prettify minimap button
@@ -33,8 +37,6 @@
 * Loot notification
 * Filter options
 * Font customization options 
-
-**Full Changelog**: https://github.com/Isselbaecher/EnhancedMythicPlusLoot/compare/0.1-Release...0.2.2-Release
 
 # 0.1-Release
 ## What's Changed
