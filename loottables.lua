@@ -139,8 +139,15 @@ function EnhancedMPlusLoot:InitLootTables()
     local specId = self.specId
 
     self.db.profile.loot[specId] = self.db.profile.loot[specId] or {}
-    self.db.profile.loot[specId].corruptData = self.db.profile.loot[specId].corruptData or true
-    self.db.profile.loot[specId].trackedLoot = self.db.profile.loot[specId].trackedLoot or {}
+    local loot = self.db.profile.loot[specId]
+
+    if loot.corruptData == nil then
+        loot.corruptData = true
+    end
+
+    if loot.trackedLoot == nil then
+        loot.trackedLoot = {}
+    end
 
     local seasonId = C_MythicPlus.GetCurrentSeason()
     local dbSeasonId = self.db.profile.currentSeasonId
