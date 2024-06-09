@@ -19,12 +19,15 @@ cleartracked    - clear tracked loot table
 
 ### Loot tracking window
 - To track an item simply click the checkbox on the left of the item.
-- Tracked items automatically appear on the right side of the dungeon finder.
+- Tracked items automatically appear in the freely movable dungeon finder frame.
 - By default tracked loot will notify you, when another instance member loots your item.
 
 ## Installation
 ### Automatic installation
 This addon is available via [CurseForge](https://www.curseforge.com/wow/addons/enhanced-mythic-plus-loot)
+
+### Manual installation
+You already know how to.
 
 # Roadmap
 - [DONE] Rework in Ace3

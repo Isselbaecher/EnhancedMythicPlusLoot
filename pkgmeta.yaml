@@ -1,8 +1,12 @@
 package-as: EnhancedMPlusLoot
+
 enable-nolib-creation: false
+
 license-output: LICENSE.txt
+
 manual-changelog: 
   filename: CHANGELOG.md
   markup-type: markdown
+
 ignore:
   - LICENSE
