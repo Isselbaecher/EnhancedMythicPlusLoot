@@ -388,6 +388,10 @@ function EnhancedMPlusLoot:ToggleMainFrame()
     frame.closebutton:SetPoint("TOPRIGHT", -2, -3)
     -- frame:SetHeight(600)
 
+    -- Make ESC work
+    _G["EnhancedMPlusLootMainFrame"] = frame.frame
+    tinsert(UISpecialFrames, "EnhancedMPlusLootMainFrame")
+
     -- Fix visibility
     local dialogbg = frame.frame:CreateTexture(nil, "BACKGROUND")
     dialogbg:SetTexture(137056)
