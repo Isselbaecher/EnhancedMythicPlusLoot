@@ -1,4 +1,9 @@
 # Version 0.3
+## 0.3.3.3-Release
+* Loot tracking frame is now moveable and will remember it's position
+* Fixed a bug where the loot frame wouldn't work with move anything or addons, that modified the PVE Frame position
+* Added ESC-Key functionality to main frame
+
 ## 0.3.3.2-Release
 * Bugfix re-fetching loot
 

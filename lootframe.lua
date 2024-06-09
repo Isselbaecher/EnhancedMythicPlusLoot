@@ -16,17 +16,22 @@ function EnhancedMPlusLoot:CreateLootFrame()
 
     -- Loot Frame
     local frame = AceGUI:Create("Window")
+    local dbStatus = self.db.profile.lootFrameStatus
     frame:SetTitle("Enhanced Mythic Plus Loot")
     frame.closebutton:SetPoint("TOPRIGHT", -2, -3)
-    frame:SetPoint("TOPLEFT", PVEFrame, "RIGHT", -5, -100)
     frame:EnableResize(false)
     frame:SetLayout("Flow")
     frame:SetAutoAdjustHeight(true)
     frame.frame:SetFrameStrata("LOW")
     frame:SetCallback("OnClose", function(widget)
+        local status = {}
+        status.top = widget.frame:GetTop()
+        status.left = widget.frame:GetLeft()
+        self.db.profile.lootFrameStatus = status
         widget:Release()
         EnhancedMPlusLoot.lootFrame = nil
     end)
+    -- frame:SetPoint("TOPLEFT", PVEFrame, "RIGHT", -5, -100)
     -- Fix visibility
     local dialogbg = frame.frame:CreateTexture(nil, "BACKGROUND")
     dialogbg:SetTexture(137056)
@@ -113,9 +118,12 @@ function EnhancedMPlusLoot:CreateLootFrame()
     local contentHeight = lootList.frame:GetHeight()
     local status = {
         height = contentHeight + 57,
-        width = frameWidth
+        width = frameWidth,
+        top = dbStatus.top,
+        left = dbStatus.left
     }
     frame:SetStatusTable(status)
+    frame:DoLayout()
 
     return frame
 end
@@ -141,6 +149,10 @@ end
 function EnhancedMPlusLoot:HideLootFrame()
     local lootFrame = self.lootFrame
     if lootFrame then
+        local status = {}
+        status.top = lootFrame.frame:GetTop()
+        status.left = lootFrame.frame:GetLeft()
+        self.db.profile.lootFrameStatus = status
         lootFrame:Release()
         self.lootFrame = nil
     end
