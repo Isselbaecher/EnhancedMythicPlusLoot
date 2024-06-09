@@ -179,7 +179,7 @@ function EnhancedMPlusLoot:CreateFilterContainer()
 
     -- Buttons
     local lootByDungeonButton = AceGUI:Create("Button")
-    lootByDungeonButton:SetText("Loot by Dungeon")
+    lootByDungeonButton:SetText(L["Loot by Dungeon"])
     lootByDungeonButton:SetWidth(150)
     lootByDungeonButton:SetCallback("OnClick", function()
         EnhancedMPlusLoot.scroll:ReleaseChildren()
@@ -192,7 +192,7 @@ function EnhancedMPlusLoot:CreateFilterContainer()
     buttonGroup:AddChild(lootByDungeonButton)
 
     local lootBySlotButton = AceGUI:Create("Button")
-    lootBySlotButton:SetText("Loot by Slot")
+    lootBySlotButton:SetText(L["Loot by Slot"])
     lootBySlotButton:SetWidth(150)
     lootBySlotButton:SetCallback("OnClick", function()
         EnhancedMPlusLoot.scroll:ReleaseChildren()

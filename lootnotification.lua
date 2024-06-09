@@ -17,7 +17,6 @@ function EnhancedMPlusLoot:CreateNotificationFrame(item, link, player, class)
     local itemFontSize = self.db.profile.lootTrackerItemFontSize
 
     -- Loot Frame
-    self:Print("Creating notification frame for " .. player .. " with item " .. link)
     local frame = AceGUI:Create("Window")
     local dialogbg = frame.frame:CreateTexture(nil, "BACKGROUND")
     dialogbg:SetTexture(137056)
@@ -81,7 +80,7 @@ function EnhancedMPlusLoot:CreateNotificationFrame(item, link, player, class)
 
     -- Buttons
     local whisper = AceGUI:Create("Button")
-    whisper:SetText("Whisper")
+    whisper:SetText(L["Whisper"])
     whisper:SetRelativeWidth(0.5)
     whisper.player = player
     whisper.link = link
@@ -91,7 +90,7 @@ function EnhancedMPlusLoot:CreateNotificationFrame(item, link, player, class)
     buttonGroup:AddChild(whisper)
 
     local groupchat = AceGUI:Create("Button")
-    groupchat:SetText("Groupchat")
+    groupchat:SetText(L["Groupchat"])
     groupchat:SetRelativeWidth(0.5)
     groupchat:SetCallback("OnClick", function(self)
         groupchat.link = link

@@ -152,10 +152,10 @@ function EnhancedMPlusLoot:InitLootTables()
     local seasonId = C_MythicPlus.GetCurrentSeason()
     local dbSeasonId = self.db.profile.currentSeasonId
     if dbSeasonId < seasonId then
-        self:Print("Old M+ SeasonID: " .. dbSeasonId)
+        self:Print(L["Old M+ SeasonID: "] .. dbSeasonId)
         self.db.profile.currentSeasonId = seasonId
         dbSeasonId = seasonId
-        self:Print("New M+ SeasonID: " .. seasonId)
+        self:Print(L["New M+ SeasonID: "] .. seasonId)
         self:DeleteTrackedLootTables()
         self:DeleteDungeonLootTables()
     end
