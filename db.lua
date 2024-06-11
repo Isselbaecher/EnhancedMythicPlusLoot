@@ -2,6 +2,7 @@ local defaults = {
     profile = {
         dataVersion = 1,
         currentSeasonId = 12,
+        currentSeasonName = nil,
 
         -- General Settings
         trackedLootPopupEnabled = true,

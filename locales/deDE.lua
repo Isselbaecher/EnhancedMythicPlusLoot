@@ -83,8 +83,14 @@ L["Old M+ SeasonId"] = "Alte M+ SeasonId"
 L["New M+ SeasonId"] = "Neue M+ SeasonId"
 
 ------------------------------------------
+L["No season currently active"] = "Momentan ist keine Season aktiv"
+L["Loot is currently being fetched and may be inaccurate"] = "Loot wird momentan geladen und kann ungenau sein"
+
+------------------------------------------
 --- SL S4
 ------------------------------------------
+L["Shadowlands Season 4"] = true
+
 -- Dungeons
 L["Nokhud Offensive"] = "Der Angriff der Nokhud"
 L["Algethar Academy"] = "Akademie von Algethar"
@@ -108,6 +114,8 @@ L["ULD"] = true
 ------------------------------------------
 --- TWW S1
 ------------------------------------------
+L["The War Within Season 1"] = true
+
 -- Dungeons
 L["Mists of Tirna Scithe"] = "Die Nebel von Tirna Scithe"
 L["Necrotic Wake"] = "Die Nekrotische Schneise"

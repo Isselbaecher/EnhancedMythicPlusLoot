@@ -40,7 +40,7 @@ function EnhancedMPlusLoot:OnEnable()
     self:InitOptions()
     self:InitLootTables()
     self:HookLootFrame()
-	self:RegisterLootNotification()
+	self:RegisterLootNotificationEvent()
 end
 
 function EnhancedMPlusLoot:OnDisable()

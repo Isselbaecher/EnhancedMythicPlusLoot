@@ -1,7 +1,7 @@
 local AceGUI = LibStub("AceGUI-3.0")
 local L = EnhancedMPlusLoot.L
 
-function EnhancedMPlusLoot:RegisterLootNotification()
+function EnhancedMPlusLoot:RegisterLootNotificationEvent()
     self:RegisterEvent("ENCOUNTER_LOOT_RECEIVED", "ShowLootNotificationFrameHook")
 end
 

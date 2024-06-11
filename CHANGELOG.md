@@ -1,4 +1,8 @@
 # Version 0.3
+## 0.3.5-Release
+* Added header displaying current season
+* Added header while currently fetching loot
+
 ## 0.3.4-Release
 * Locale enUS
 * Locale deDE

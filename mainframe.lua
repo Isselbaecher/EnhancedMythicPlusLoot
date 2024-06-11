@@ -239,6 +239,46 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
         loot = self.db.profile.loot[specId].lootBySlot
     end
     local i = 1
+
+    -- START Season Header
+    local seasonRow = AceGUI:Create("SimpleGroup")
+    self.lootContainerRows[i] = seasonRow
+    seasonRow:SetFullWidth(true)
+    seasonRow:SetLayout("Flow")
+    lootContainer:AddChild(seasonRow)
+
+    local seasonHeader = AceGUI:Create("Heading")
+    seasonHeader:SetText(self.db.profile.currentSeasonName)
+    seasonHeader:SetFullWidth(true)
+    seasonHeader.label:SetFont(dividerFontPath, dividerFontSize + 3, dividerFontFlags)
+    self.lootContainerRows[i]:AddChild(seasonHeader)
+    self.lootContainerRows[i].isHeader = true
+
+    i = i + 1
+    -- END Season Header
+
+    -- START Fetching loot header
+    local isCurrentlyFetching = self.db.profile.loot[specId].corruptData
+    local seasonId = self.db.profile.currentSeasonId
+    if isCurrentlyFetching and seasonId ~= 0 then
+        local fetchingLootRow = AceGUI:Create("SimpleGroup")
+        self.lootContainerRows[i] = fetchingLootRow
+        fetchingLootRow:SetFullWidth(true)
+        fetchingLootRow:SetLayout("Flow")
+        lootContainer:AddChild(fetchingLootRow)
+
+        local fetchingLootHeader = AceGUI:Create("Heading")
+        fetchingLootHeader:SetText(L["Loot is currently being fetched and may be inaccurate"])
+        fetchingLootHeader:SetFullWidth(true)
+        fetchingLootHeader.label:SetFont(dividerFontPath, dividerFontSize + 3, dividerFontFlags)
+        fetchingLootHeader.label:SetVertexColor(1, 0, 0)
+        self.lootContainerRows[i]:AddChild(fetchingLootHeader)
+        self.lootContainerRows[i].isHeader = true
+
+        i = i + 1
+    end
+    -- END Fetching loot header
+
     for _, loot in pairs(loot) do
         local headerSet = false
 
