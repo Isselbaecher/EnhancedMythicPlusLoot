@@ -41,6 +41,7 @@ function EnhancedMPlusLoot:OnEnable()
     self:InitLootTables()
     self:HookLootFrame()
 	self:RegisterLootNotificationEvent()
+    self:RegisterSpecChangeEvent()
 end
 
 function EnhancedMPlusLoot:OnDisable()

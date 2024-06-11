@@ -150,10 +150,10 @@ function EnhancedMPlusLoot:InitLootTables()
     end
 
     local seasonId = C_MythicPlus.GetCurrentSeason()
-    local dbSeasonId = self.db.profile.currentSeasonId
+    local dbSeasonId = self.db.profile.loot[specId].currentSeasonId or 0
     if dbSeasonId < seasonId or (seasonId == 0 and dbSeasonId ~= 0) then
         self:Print(L["Old M+ SeasonID: "] .. dbSeasonId)
-        self.db.profile.currentSeasonId = seasonId
+        self.db.profile.loot[specId].currentSeasonId = seasonId
         self.db.profile.currentSeasonName = self.seasonNames[seasonId]
         dbSeasonId = seasonId
         self:Print(L["New M+ SeasonID: "] .. seasonId)
@@ -166,4 +166,8 @@ function EnhancedMPlusLoot:InitLootTables()
         self:CancelAllTimers()
         self:TryGenerateLootTablesNTimes(1, specId, numScans)
     end
+end
+
+function EnhancedMPlusLoot:RegisterSpecChangeEvent()
+    self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "InitLootTables")
 end

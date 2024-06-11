@@ -2,6 +2,7 @@
 ## 0.3.5-Release
 * Added header displaying current season
 * Added header while currently fetching loot
+* Added automatic loot fetching on spec change
 
 ## 0.3.4-Release
 * Locale enUS

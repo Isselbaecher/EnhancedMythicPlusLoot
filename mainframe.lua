@@ -259,7 +259,7 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
 
     -- START Fetching loot header
     local isCurrentlyFetching = self.db.profile.loot[specId].corruptData
-    local seasonId = self.db.profile.currentSeasonId
+    local seasonId = self.db.profile.loot[specId].currentSeasonId
     if isCurrentlyFetching and seasonId ~= 0 then
         local fetchingLootRow = AceGUI:Create("SimpleGroup")
         self.lootContainerRows[i] = fetchingLootRow
@@ -267,15 +267,24 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
         fetchingLootRow:SetLayout("Flow")
         lootContainer:AddChild(fetchingLootRow)
 
+        local topDivider = AceGUI:Create("Heading")
+        topDivider:SetFullWidth(true)
+        self.lootContainerRows[i]:AddChild(topDivider)
+        self.lootContainerRows[i].isHeader = true
+
         local fetchingLootHeader = AceGUI:Create("Heading")
         fetchingLootHeader:SetText(L["Loot is currently being fetched and may be inaccurate"])
         fetchingLootHeader:SetFullWidth(true)
-        fetchingLootHeader.label:SetFont(dividerFontPath, dividerFontSize + 3, dividerFontFlags)
-        fetchingLootHeader.label:SetVertexColor(1, 0, 0)
+        fetchingLootHeader.label:SetFont(dividerFontPath, dividerFontSize + 6, dividerFontFlags)
         self.lootContainerRows[i]:AddChild(fetchingLootHeader)
         self.lootContainerRows[i].isHeader = true
 
-        i = i + 1
+        local bottomDivider = AceGUI:Create("Heading")
+        bottomDivider:SetFullWidth(true)
+        self.lootContainerRows[i]:AddChild(bottomDivider)
+        self.lootContainerRows[i].isHeader = true
+
+        i = i + 3
     end
     -- END Fetching loot header
 
