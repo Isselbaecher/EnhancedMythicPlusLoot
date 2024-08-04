@@ -107,10 +107,10 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
     local specId = self.specId
     currentTry = currentTry or 1
     self:GenerateLootTables()
+    self:UpdateMainFrame()
 
     if not self.db.profile.loot[specId].corruptData then
         self:Print(L["Fetch loot - "] .. L["success"])
-        self:UpdateMainFrame()
         return
     elseif currentTry == 1 then
         delay = 1

@@ -1,4 +1,7 @@
 # Version 0.3
+## 0.3.6-Release
+* Update mainframe whenever loot data changes
+
 ## 0.3.5-Release
 * Added header displaying current season
 * Added header while currently fetching loot
