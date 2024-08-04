@@ -39,4 +39,4 @@ You already know how to.
 If you're expieriencing bugs, please let me know.
 (Resonable) feature requests are also welcome.
 
-Bugtracker and feature requests via [CurseForge](https://legacy.curseforge.com/wow/addons/enhanced-mythic-plus-loot/issues)
+Bugtracker and feature requests via [CurseForge](https://legacy.curseforge.com/wow/addons/enhanced-mythic-plus-loot/issues) or [GitHub](https://github.com/Isselbaecher/EnhancedMythicPlusLoot/issues)
