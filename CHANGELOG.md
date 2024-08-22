@@ -1,3 +1,7 @@
+# Version 0.4
+## 0.4.0-Release
+* TWW Release
+
 # Version 0.3
 ## 0.3.6-Release
 * Update mainframe whenever loot data changes
