@@ -121,7 +121,8 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
     end
 
     if currentTry <= maxTries then
-        self:ScheduleTimer("TryGenerateLootTablesNTimes", delay, delay, maxTries, currentTry + 1)
+        local nextTry = currentTry + 1
+        self:ScheduleTimer("TryGenerateLootTablesNTimes", delay, delay, maxTries, nextTry)
     else
         self:Print(L["Fetch loot - "] .. L["failed"])
     end
@@ -172,7 +173,7 @@ function EnhancedMPlusLoot:InitLootTables()
     dungeonIDs = EnhancedMPlusLoot.dungeonIDs[dbSeasonId]
     if self.db.profile.loot[specId].corruptData then
         self:CancelAllTimers()
-        self:TryGenerateLootTablesNTimes(1, specId, numScans)
+        self:TryGenerateLootTablesNTimes(1, numScans, 1)
     end
 end
 
