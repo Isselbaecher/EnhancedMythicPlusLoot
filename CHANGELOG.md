@@ -1,5 +1,9 @@
 # Version 0.5
 ## 0.5.1-Release
+* Added inaccurate data header
+* Bugfix "Loot is currently beeing fetched" display when inaccurate data
+
+## 0.5.1-Release
 * Bugfix: Number of scans for items was specId
 * Added season not active header
 
