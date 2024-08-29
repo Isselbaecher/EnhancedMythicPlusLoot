@@ -1,4 +1,8 @@
 # Version 0.5
+## 0.5.1-Release
+* Bugfix: Number of scans for items was specId
+* Added season not active header
+
 ## 0.5.0-Release
 * Set default season id to TWW S1
 
