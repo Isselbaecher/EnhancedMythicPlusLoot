@@ -1,3 +1,7 @@
+# Version 0.5
+## 0.5.0-Release
+* Set default season id to TWW S1
+
 # Version 0.4
 ## 0.4.0-Release
 * TWW Release

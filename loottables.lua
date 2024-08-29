@@ -150,6 +150,14 @@ function EnhancedMPlusLoot:InitLootTables()
     end
 
     local seasonId = C_MythicPlus.GetCurrentSeason()
+    local mplusActive = C_MythicPlus.IsMythicPlusActive()
+    if not mplusActive then
+        seasonId = EnhancedMPlusLoot.defaultSeasonId
+        self.db.profile.mplusActive = false
+    else
+        self.db.profile.mplusActive = true
+    end
+
     local dbSeasonId = self.db.profile.loot[specId].currentSeasonId or 0
     if dbSeasonId < seasonId or (seasonId == 0 and dbSeasonId ~= 0) then
         self:Print(L["Old M+ SeasonID: "] .. dbSeasonId)

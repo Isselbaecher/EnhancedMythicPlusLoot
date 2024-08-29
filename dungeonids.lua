@@ -97,3 +97,5 @@ EnhancedMPlusLoot.dungeonIDs = {
     [12] = dfS4,
     [13] = twwS1
 }
+
+EnhancedMPlusLoot.defaultSeasonId = 13
