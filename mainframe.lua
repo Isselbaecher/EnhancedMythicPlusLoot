@@ -273,12 +273,7 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
         self.lootContainerRows[i]:AddChild(seasonNotActiveHeader)
         self.lootContainerRows[i].isHeader = true
 
-        local bottomDivider = AceGUI:Create("Heading")
-        bottomDivider:SetFullWidth(true)
-        self.lootContainerRows[i]:AddChild(bottomDivider)
-        self.lootContainerRows[i].isHeader = true
-
-        i = i + 2
+        i = i + 1
     end
     -- END Season not active header
 
