@@ -257,6 +257,31 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
     i = i + 1
     -- END Season Header
 
+    -- START Season not active header
+    local mplusActive = self.db.profile.mplusActive
+    if not mplusActive then
+        local seasonNotActiveRow = AceGUI:Create("SimpleGroup")
+        self.lootContainerRows[i] = seasonNotActiveRow
+        seasonNotActiveRow:SetFullWidth(true)
+        seasonNotActiveRow:SetLayout("Flow")
+        lootContainer:AddChild(seasonNotActiveRow)
+
+        local seasonNotActiveHeader = AceGUI:Create("Heading")
+        seasonNotActiveHeader:SetText(L["No season currently active - loot may be inaccurate"])
+        seasonNotActiveHeader:SetFullWidth(true)
+        seasonNotActiveHeader.label:SetFont(dividerFontPath, dividerFontSize + 3, dividerFontFlags)
+        self.lootContainerRows[i]:AddChild(seasonNotActiveHeader)
+        self.lootContainerRows[i].isHeader = true
+
+        local bottomDivider = AceGUI:Create("Heading")
+        bottomDivider:SetFullWidth(true)
+        self.lootContainerRows[i]:AddChild(bottomDivider)
+        self.lootContainerRows[i].isHeader = true
+
+        i = i + 2
+    end
+    -- END Season not active header
+
     -- START Fetching loot header
     local isCurrentlyFetching = self.db.profile.loot[specId].corruptData
     local seasonId = self.db.profile.loot[specId].currentSeasonId
