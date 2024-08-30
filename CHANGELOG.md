@@ -1,5 +1,9 @@
 # Version 0.5
-## 0.5.1-Release
+## 0.5.3-Release
+* Automatic reload if new season becomes active
+* Bugfix: Data will not load when season not active
+
+## 0.5.2-Release
 * Added inaccurate data header
 * Bugfix "Loot is currently beeing fetched" display when inaccurate data
 

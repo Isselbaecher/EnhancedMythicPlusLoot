@@ -159,6 +159,10 @@ function EnhancedMPlusLoot:InitLootTables()
         seasonId = EnhancedMPlusLoot.defaultSeasonId
         self.db.profile.mplusActive = false
     else
+        local dbMplusActive = self.db.profile.mplusActive or false
+        if not dbMplusActive then
+            self.db.profile.loot[specId].currentSeasonId = 0
+        end
         self.db.profile.mplusActive = true
     end
 
@@ -171,6 +175,10 @@ function EnhancedMPlusLoot:InitLootTables()
         self:Print(L["New M+ SeasonID: "] .. seasonId)
         self:DeleteTrackedLootTables()
         self:DeleteDungeonLootTables()
+    end
+
+    if self.db.profile.loot[specId].corruptData == nil then
+        self.db.profile.loot[specId].corruptData = true
     end
 
     dungeonIDs = EnhancedMPlusLoot.dungeonIDs[dbSeasonId]
