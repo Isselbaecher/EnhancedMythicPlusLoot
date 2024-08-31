@@ -49,6 +49,7 @@ L["Set the font flags for the divider text (dungeon/slot)."] = "Setze die Schrif
 L["Fetch loot - "] = "Loot holen - "
 L["success"] = "erfolgreich"
 L["failed"] = "fehlgeschlagen"
+L["incomplete"] = "unvollstaendig"
 L["start"] = "starte"
 L["waiting for another "] = "warte weitere "
 L[" seconds"] = " Sekunden"
@@ -85,6 +86,7 @@ L["New M+ SeasonId"] = "Neue M+ SeasonId"
 ------------------------------------------
 L["No season currently active"] = "Momentan ist keine Season aktiv"
 L["Loot is currently being fetched and may be inaccurate"] = "Loot wird momentan geladen und kann ungenau sein"
+L["season is not yet active - loot may be incorrect"] = "Keine Season aktiv - loot kann ungenau sein"
 
 ------------------------------------------
 --- SL S4

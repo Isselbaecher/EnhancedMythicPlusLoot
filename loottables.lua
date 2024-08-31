@@ -127,7 +127,12 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
         self:ScheduleTimer("TryGenerateLootTablesNTimes", delay, delay, maxTries, nextTry)
     else
         EnhancedMPlusLoot.currentlyFetching = false
-        self:Print(L["Fetch loot - "] .. L["failed"])
+        self:Print(L["Fetch loot - "] .. L["incomplete"])
+        local seasonActive = self.db.profile.mplusActive or false
+        if not seasonActive then
+            self:Print(L["season is not yet active - loot may be incorrect"])
+        end
+
     end
 end
 
