@@ -1,6 +1,7 @@
 # Version 0.5
 ## 0.5.3-Release
 * Automatic reload if new season becomes active
+* Better notifications for "fetching loot"
 * Bugfix: Data will not load when season not active
 
 ## 0.5.2-Release
