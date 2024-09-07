@@ -1,4 +1,7 @@
 # Version 0.5
+## 0.5.4-Release
+* Added siplified chinese translation (thanks to Mr7eiz)
+
 ## 0.5.3-Release
 * Automatic reload if new season becomes active
 * Better notifications for "fetching loot"
