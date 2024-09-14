@@ -336,7 +336,26 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
     for _, loot in pairs(loot) do
         local headerSet = false
 
+        local sortedLoot = {}
+
         for itemId, item in pairs(loot) do
+            table.insert(sortedLoot, { itemId = itemId, item = item })
+        end
+
+        if isByDungeon then
+            table.sort(sortedLoot, function(a, b)
+                return a.item.slot < b.item.slot
+            end)
+        else
+            table.sort(sortedLoot, function(a, b)
+                return a.item.dungeonShortName < b.item.dungeonShortName
+            end)
+        end
+
+
+        for _, sortedItem in ipairs(sortedLoot) do
+            local itemId = sortedItem.itemId
+            local item = sortedItem.item
 
             -- HEADER ROW
             if not headerSet then
@@ -402,12 +421,20 @@ function EnhancedMPlusLoot:CreateLootContainer(byDungeon)
             self.lootContainerRows[i]:AddChild(itemCheckbox)
 
             -- Dungeon or slot
-            local dungeonOrSlot = AceGUI:Create("Label")
+            local dungeonOrSlot = AceGUI:Create("InteractiveLabel")
             if isByDungeon then
                 dungeonOrSlot:SetText(item.slot)
                 dungeonOrSlot:SetWidth(100)
             else
                 dungeonOrSlot:SetText(item.dungeonShortName)
+                dungeonOrSlot:SetCallback("OnEnter", function(widget, event, value)
+                    GameTooltip:SetOwner(widget.frame, "ANCHOR_LEFT", 0, 0)
+                    GameTooltip:SetText(item.dungeonName)
+                    GameTooltip:Show()
+                end)
+                dungeonOrSlot:SetCallback("OnLeave", function(widget, event, value)
+                    GameTooltip:Hide()
+                end)
                 dungeonOrSlot:SetWidth(50)
             end
             dungeonOrSlot:SetFont(itemFontPath, itemFontSize, itemFontFlags)
