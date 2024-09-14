@@ -1,6 +1,8 @@
 # Version 0.5
 ## 0.5.4-Release
 * Added siplified chinese translation (thanks to Mr7eiz)
+* Ordered displayed items so slots and dungeons are grouped
+* Added category "Other" for items without a slot (Mounts, Conduits, ..)
 
 ## 0.5.3-Release
 * Automatic reload if new season becomes active
