@@ -62,6 +62,10 @@ function EnhancedMPlusLoot:GenerateLootTables()
             local currentLoot = C_EncounterJournal.GetLootInfoByIndex(i)
             local lootStats = C_Item.GetItemStats("item:" .. tostring(currentLoot.itemID))
 
+            if currentLoot.slot == nil or currentLoot.slot == '' then
+                currentLoot.slot = L["Other"]
+            end
+
             if currentLoot.name ~= nil and currentLoot.slot ~= nil and currentLoot.slot ~= '' then
                 local loot = {
                     name = currentLoot.name,
@@ -161,6 +165,7 @@ function EnhancedMPlusLoot:InitLootTables()
     local seasonId = C_MythicPlus.GetCurrentSeason()
     local mplusActive = C_MythicPlus.IsMythicPlusActive()
     if not mplusActive then
+        self:Print(L["No season currently active"])
         seasonId = EnhancedMPlusLoot.defaultSeasonId
         self.db.profile.mplusActive = false
     else
