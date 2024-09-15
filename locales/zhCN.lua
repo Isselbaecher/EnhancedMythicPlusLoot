@@ -1,6 +1,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("EnhancedMPlusLoot", "zhCN", false, true)
 if not L then
-return
+    return
 end
 
 -- Big thanks to Mr7eiz for the translation
