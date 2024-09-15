@@ -1,6 +1,6 @@
 # Version 0.5
 ## 0.5.5-Release
-* Localisation should now work properly (thanks Jaidy88)
+* Localisation should now work properly (thanks cycledm)
 * Fixed a bug resetting checked items
 
 ## 0.5.4-Release
