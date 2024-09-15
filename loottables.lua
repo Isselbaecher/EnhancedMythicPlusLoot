@@ -140,7 +140,25 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
     end
 end
 
-function EnhancedMPlusLoot:InitLootTables()
+function EnhancedMPlusLoot:InitLootTables(delay, maxTries, currentTry)
+    delay = delay or 3
+    maxTries = maxTries or 3
+    currentTry = currentTry or 1
+
+    local mplusActive = C_MythicPlus.IsMythicPlusActive()
+
+    if currentTry <= maxTries and not mplusActive then
+        local nextTry = currentTry + 1
+        self:ScheduleTimer("InitLootTables", delay, delay, maxTries, nextTry)
+    end
+    
+    if mplusActive or currentTry > maxTries then
+        self:InitLootTablesInternal()
+        self:UpdateMainFrame()
+    end
+end
+
+function EnhancedMPlusLoot:InitLootTablesInternal()
     C_MythicPlus.RequestMapInfo()
 
     self.playerClassId = select(3, UnitClass("player"))
