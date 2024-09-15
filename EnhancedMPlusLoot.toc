@@ -9,6 +9,8 @@
 embeds.xml
 
 locales\enUS.lua
+locales\deDE.lua
+locales\zhCN.lua
 EnhancedMPlusLoot.lua
 util.lua
 db.lua
