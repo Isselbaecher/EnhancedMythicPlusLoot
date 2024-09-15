@@ -140,6 +140,10 @@ function EnhancedMPlusLoot:TryGenerateLootTablesNTimes(delay, maxTries, currentT
     end
 end
 
+function EnhancedMPlusLoot:InitLootTablesCallbackFunction()
+    self:InitLootTables()
+end
+
 function EnhancedMPlusLoot:InitLootTables(delay, maxTries, currentTry)
     delay = delay or 3
     maxTries = maxTries or 3
@@ -217,5 +221,5 @@ function EnhancedMPlusLoot:InitLootTablesInternal()
 end
 
 function EnhancedMPlusLoot:RegisterSpecChangeEvent()
-    self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "InitLootTables")
+    self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", "InitLootTablesCallbackFunction")
 end
