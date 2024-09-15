@@ -1,6 +1,9 @@
 # Version 0.5
+## 0.5.6-Release
+* Fixed error when changing spec / entering raid
+
 ## 0.5.5-Release
-* Localisation should now work properly (thanks cycledm)
+* Localisation should now work properly (thanks to cycledm)
 * Fixed a bug resetting checked items
 
 ## 0.5.4-Release
