@@ -1,4 +1,8 @@
 # Version 0.5
+## 0.5.5-Release
+* Localisation should now work properly (thanks Jaidy88)
+* Fixed a bug resetting checked items
+
 ## 0.5.4-Release
 * Added siplified chinese translation (thanks to Mr7eiz)
 * Ordered displayed items so slots and dungeons are grouped
