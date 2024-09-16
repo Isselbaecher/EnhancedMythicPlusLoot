@@ -91,6 +91,8 @@ L["Whisper"] = "密语"
 L["Groupchat"] = "团队聊天"
 L["Old M+ SeasonId"] = "旧版M+ 赛季ID"
 L["New M+ SeasonId"] = "新版M+ 赛季ID"
+L["Do you need "] = "请问这件装备："
+L["?"] = "您要吗？能否交易给我？"
 
 L["No season currently active"] = "当前没有活跃的赛季"
 L["Loot is currently being fetched and may be inaccurate"] = "当前正在获取战利品，可能不准确"
