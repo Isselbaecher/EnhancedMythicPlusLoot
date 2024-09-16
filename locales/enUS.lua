@@ -82,6 +82,8 @@ L["Whisper"] = true
 L["Groupchat"] = true
 L["Old M+ SeasonId"] = true
 L["New M+ SeasonId"] = true
+L["Do you need "] = true
+L["?"] = true
 
 ------------------------------------------
 L["No season currently active"] = true
