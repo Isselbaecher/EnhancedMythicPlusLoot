@@ -85,7 +85,7 @@ function EnhancedMPlusLoot:CreateNotificationFrame(item, link, player, class)
     whisper.player = player
     whisper.link = link
     whisper:SetCallback("OnClick", function(self)
-        SendChatMessage("Do you need " .. self.link .. "?", "WHISPER", nil, self.player)
+        SendChatMessage(L["Do you need "] .. self.link .. L["?"], "WHISPER", nil, self.player)
     end)
     buttonGroup:AddChild(whisper)
 
@@ -94,7 +94,7 @@ function EnhancedMPlusLoot:CreateNotificationFrame(item, link, player, class)
     groupchat:SetRelativeWidth(0.5)
     groupchat:SetCallback("OnClick", function(self)
         groupchat.link = link
-        SendChatMessage("Do you need " .. self.link .. "?", "PARTY")
+        SendChatMessage(L["Do you need "] .. self.link .. L["?"], "PARTY")
     end)
     buttonGroup:AddChild(groupchat)
 
