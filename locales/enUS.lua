@@ -131,11 +131,11 @@ L["The Stonevault"] = true
 L["The Dawnbreaker"] = true
 
 -- Dungeon Short
-L["MOTS"] = true
+L["MOTS"] = "MISTS"
 L["NW"] = true
-L["SOB"] = true
+L["SOB"] = "SIEGE"
 L["GB"] = true
-L["AK"] = true
+L["AK"] = "ARAK"
 L["COT"] = true
 L["SV"] = true
-L["DB"] = true
+L["DB"] = "DAWN"
