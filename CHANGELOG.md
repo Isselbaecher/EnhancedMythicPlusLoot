@@ -1,3 +1,9 @@
+# Version 0.6
+## 0.6.0-Release
+* New Ace3 Version 1349
+* TWW S2
+* Locales (zhCN & Simplified Chinese) thanks CycleDM <3
+
 # Version 0.5
 ## 0.5.6-Release
 * Fixed error when changing spec / entering raid
