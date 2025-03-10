@@ -139,3 +139,28 @@ L["AK"] = "ARAK"
 L["COT"] = true
 L["SV"] = true
 L["DB"] = "DAWN"
+
+------------------------------------------
+--- TWW S2
+------------------------------------------
+L["The War Within Season 2"] = true
+
+-- Dungeons
+L["Cinderbrew Meadery"] = true
+L["Darkflame Cleft"] = true
+L["Priory of the sacred Flame"] = true
+L["The Rookery"] = true
+L["Operation: Floodgate"] = true
+L["Theater of Pain"] = true
+L["Operation: Mechagon"] = true
+L["The Motherlode!!"] = true
+
+-- Dungeon Short
+L["CM"] = true
+L["DC"] = true
+L["POF"] = true
+L["TR"] = true
+L["OF"] = true
+L["TOP"] = true
+L["OM"] = true
+L["TM"] = true

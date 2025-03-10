@@ -86,16 +86,61 @@ local twwS1 = {
     }
 }
 
+local twwS2 = {
+    {
+        shortName = L["CM"],
+        fullName = L["Cinderbrew Meadery"],
+        id = 1272
+    },
+    {
+        shortName = L["DC"],
+        fullName = L["Darkflame Cleft"],
+        id = 1210
+    },
+    {
+        shortName = L["POF"],
+        fullName = L["Priory of the sacred Flame"],
+        id = 1267
+    },
+    {
+        shortName = L["TR"],
+        fullName = L["The Rookery"],
+        id = 1268
+    },
+    {
+        shortName = L["OF"],
+        fullName = L["Operation: Floodgate"],
+        id = 1298
+    },
+    {
+        shortName = L["TOP"],
+        fullName = L["Theater of Pain"],
+        id = 1187
+    },
+    {
+        shortName = L["OM"],
+        fullName = L["Operation: Mechagon"],
+        id = 1178
+    },
+    {
+        shortName = L["TM"],
+        fullName = L["The Motherlode!!"],
+        id = 1012
+    }
+}
+
 EnhancedMPlusLoot.seasonNames = {
     [0] = L["No season currently active"],
     [12] = L["Dragonflight Season 4"],
-    [13] = L["The War Within Season 1"]
+    [13] = L["The War Within Season 1"],
+    [14] = L["The War Within Season 2"]
 }
 
 EnhancedMPlusLoot.dungeonIDs = {
     [0] = {},
     [12] = dfS4,
-    [13] = twwS1
+    [13] = twwS1,
+    [14] = twwS2
 }
 
-EnhancedMPlusLoot.defaultSeasonId = 13
+EnhancedMPlusLoot.defaultSeasonId = 14

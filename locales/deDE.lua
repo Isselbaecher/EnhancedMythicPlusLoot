@@ -137,3 +137,28 @@ L["AK"] = true
 L["COT"] = "SDF"
 L["SV"] = "SB"
 L["DB"] = "MB"
+
+------------------------------------------
+--- TWW S2
+------------------------------------------
+L["The War Within Season 2"] = true
+
+-- Dungeons
+L["Cinderbrew Meadery"] = "Metbrauerei Glutbräu"
+L["Darkflame Cleft"] = "Dunkelflammenspalt"
+L["Priory of the sacred Flame"] = "Priorat der Heiligen Flamme"
+L["The Rookery"] = "Die Brutstätte"
+L["Operation: Floodgate"] = "Operation: Schleuse"
+L["Theater of Pain"] = "Theater der Schmerzen"
+L["Operation: Mechagon"] = true
+L["The MOTHERLODE!!"] = "Das RIESENFLÖZ!!"
+
+-- Dungeon Short
+L["CM"] = "MG"
+L["DC"] = "DF"
+L["POF"] = "PDHF"
+L["TR"] = "DB"
+L["OF"] = true
+L["TOP"] = "TDS"
+L["OM"] = true
+L["TM"] = true
