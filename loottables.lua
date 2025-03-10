@@ -40,14 +40,14 @@ function EnhancedMPlusLoot:GenerateLootTables()
 
     local classId = self.playerClassId
     local specId = self.specId
-    local mythiDifficulty = 8
+    local mythicDifficulty = 8
     local mythicPlusLevel = self.db.profile.mythicPlusLevel
 
     EJ_ClearSearch()
     C_EncounterJournal.ResetSlotFilter()
     EJ_ResetLootFilter()
     EJ_SetLootFilter(classId, specId)
-    EJ_SetDifficulty(mythiDifficulty)
+    EJ_SetDifficulty(mythicDifficulty)
     C_EncounterJournal.SetPreviewMythicPlusLevel(mythicPlusLevel)
 
     local corruptData = false
@@ -56,6 +56,14 @@ function EnhancedMPlusLoot:GenerateLootTables()
         lootByDungeon[dungeon.id] = {}
 
         EJ_SelectInstance(dungeon.id)
+        local testDifficultyID = EJ_GetDifficulty()
+        
+        if testDifficultyID ~= mythicDifficulty then
+            EJ_SetLootFilter(classId, specId)
+            EJ_SetDifficulty(mythicDifficulty)
+            C_EncounterJournal.SetPreviewMythicPlusLevel(mythicPlusLevel)
+        end
+
         local numLoot = EJ_GetNumLoot()
 
         for i = 1, numLoot do
