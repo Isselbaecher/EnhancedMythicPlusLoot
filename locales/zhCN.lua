@@ -100,28 +100,6 @@ L["season is not yet active - loot may be incorrect"] = "赛季尚未激活 - �
 L["loot may be inaccurate"]="战利品可能不准确"
 L["Loot is currently being fetched"]="正在获取战利品"
 
---- SL S4
-L["Shadowlands Season 4"] = "暗影国度第四赛季"
-
--- 地下城
-L["Nokhud Offensive"] = "诺库德阻击战"
-L["Algethar Academy"] = "艾杰斯亚学院"
-L["Ruby Life Pools"] = "红玉新生法池"
-L["Azure Vault"] = "碧蓝魔馆"
-L["Neltharus"] = "奈萨鲁斯"
-L["Brackenhide Hollow"] = "蕨皮山谷"
-L["Halls of Infusion"] = "注能大厅"
-L["Uldaman"] = "奥达曼"
-
--- 地下城简称
-L["NO"] = "诺库德"
-L["AA"] = "学院"
-L["RLP"] = "红玉"
-L["AV"] = "碧蓝"
-L["NEL"] = "奈萨"
-L["BH"] = "蕨皮"
-L["HOI"] = "注能"
-L["ULD"] = "奥达曼"
 
 --- TWW S1
 L["The War Within Season 1"] = "地心之战第一赛季"
