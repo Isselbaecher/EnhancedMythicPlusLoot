@@ -88,30 +88,6 @@ L["No season currently active"] = "Momentan ist keine Season aktiv"
 L["Loot is currently being fetched and may be inaccurate"] = "Loot wird momentan geladen und kann ungenau sein"
 L["season is not yet active - loot may be incorrect"] = "Keine Season aktiv - loot kann ungenau sein"
 
-------------------------------------------
---- SL S4
-------------------------------------------
-L["Shadowlands Season 4"] = true
-
--- Dungeons
-L["Nokhud Offensive"] = "Der Angriff der Nokhud"
-L["Algethar Academy"] = "Akademie von Algethar"
-L["Ruby Life Pools"] = "Rubinlebensbecken"
-L["Azure Vault"] = "Azurblaues Gewölbe"
-L["Neltharus"] = true
-L["Brackenhide Hollow"] = "Brackenfellhöhle"
-L["Halls of Infusion"] = "Hallen der Infusion"
-L["Uldaman"] = true
-
--- Dungeon Short
-L["NO"] = "ADN"
-L["AA"] = true
-L["RLP"] = "RLB"
-L["AV"] = "AG"
-L["NEL"] = "NEL"
-L["BH"] = "BFH"
-L["HOI"] = "HDI"
-L["ULD"] = true
 
 ------------------------------------------
 --- TWW S1
