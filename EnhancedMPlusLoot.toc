@@ -2,15 +2,29 @@
 ## Title: EnhancedMPlusLoot
 ## Version: @project-version@
 ## Notes: Enhances M+ Loot Interface
+## Notes-ruRU: Улучшенный интерфейс добычи подземелий M+
 ## Author: Supersoaker of Eredar [EU]
 ## IconTexture: Interface\Addons\EnhancedMPlusLoot\images\EMPL
 ## SavedVariables: EnhancedMPlusLootDB
+
+## Category-enUS: Mythic+ Dungeons
+## Category-deDE: Mythic+ Dungeons
+## Category-esES: Mythic+ Dungeons
+## Category-esMX: Mythic+ Dungeons
+## Category-frFR: Donjons Mythique+
+## Category-itIT: Mythic+ Dungeons
+## Category-koKR: Mythic+ Dungeons
+## Category-ptBR: Mythic+ Dungeons
+## Category-ruRU: Подземелья М+
+## Category-zhCN: Mythic+ Dungeons
+## Category-zhTW: Mythic+ Dungeons
 
 embeds.xml
 
 locales\enUS.lua
 locales\deDE.lua
 locales\zhCN.lua
+locales\ruRU.lua
 EnhancedMPlusLoot.lua
 util.lua
 db.lua
