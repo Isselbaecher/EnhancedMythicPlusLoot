@@ -44,6 +44,15 @@ L["Dungeons"] = true
 L["Set the font size for the divider text (dungeon/slot)."] = true
 L["Set the font for the divider text (dungeon/slot)."] = true
 L["Set the font flags for the divider text (dungeon/slot)."] = true
+L["Divider"] = true
+L["Divider Font"] = true
+L["Divider Font Flags"] = true
+L["Divider Font Size"] = true
+L["Hide minimap icon"] = true
+L["Hides the minimap icon."] = true
+L["Reset tracked loot"] = true
+L["Reload dungeon loot"] = true
+L["Reloads the dungeon loot tables from the adventure journal"] = true
 
 -- Generating loot tables
 L["Fetch loot - "] = true
@@ -89,31 +98,9 @@ L["?"] = true
 L["No season currently active"] = true
 L["Loot is currently being fetched and may be inaccurate"] = true
 L["season is not yet active - loot may be incorrect"] = true
+L["loot may be inaccurate"] = true
+L["Loot is currently being fetched"] = true
 
-------------------------------------------
---- SL S4
-------------------------------------------
-L["Shadowlands Season 4"] = true
-
--- Dungeons
-L["Nokhud Offensive"] = true
-L["Algethar Academy"] = true
-L["Ruby Life Pools"] = true
-L["Azure Vault"] = true
-L["Neltharus"] = true
-L["Brackenhide Hollow"] = true
-L["Halls of Infusion"] = true
-L["Uldaman"] = true
-
--- Dungeon Short
-L["NO"] = true
-L["AA"] = true
-L["RLP"] = true
-L["AV"] = true
-L["NEL"] = true
-L["BH"] = true
-L["HOI"] = true
-L["ULD"] = true
 
 ------------------------------------------
 --- TWW S1
