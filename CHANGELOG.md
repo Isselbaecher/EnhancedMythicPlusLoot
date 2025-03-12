@@ -1,4 +1,7 @@
 # Version 0.6
+## 0.6.2-Release
+* Added ru_RU and code cleanup (thanks Hollicsh <3)
+
 ## 0.6.1-Release
 * Added zhCN for TWW S2 thanks JiNiTaiMei2023 <3
 
