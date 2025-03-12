@@ -1,4 +1,7 @@
 # Version 0.6
+## 0.6.1-Release
+* Added zhCN for TWW S2 thanks JiNiTaiMei2023 <3
+
 ## 0.6.0-Release
 * New Ace3 Version 1349
 * TWW S2

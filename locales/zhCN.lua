@@ -145,3 +145,26 @@ L["AK"] = "艾拉"
 L["COT"] = "千丝"
 L["SV"] = "矶石"
 L["DB"] = "破晨号"
+
+--- TWW S2
+L["The War Within Season 2"] = "地心之战第二赛季"
+
+-- Dungeons
+L["Cinderbrew Meadery"] = "燧酿酒庄"
+L["Darkflame Cleft"] = "暗焰裂口"
+L["Priory of the sacred Flame"] = "圣焰隐修院"
+L["The Rookery"] = "驭雷栖巢"
+L["Operation: Floodgate"] = "水闸行动"
+L["Theater of Pain"] = "伤逝剧场"
+L["Operation: Mechagon"] = "麦卡贡行动"
+L["The Motherlode!!"] = "暴富矿区！！"
+
+-- Dungeon Short
+L["CM"] = "酒庄"
+L["DC"] = "裂口"
+L["POF"] = "隐修院"
+L["TR"] = "驭雷"
+L["OF"] = "水闸"
+L["TOP"] = "剧场"
+L["OM"] = "麦卡贡"
+L["TM"] = "暴富"
