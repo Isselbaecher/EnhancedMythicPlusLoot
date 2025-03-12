@@ -1,48 +1,5 @@
 local L = EnhancedMPlusLoot.L
 
-local dfS4 = {
-    {
-        shortName = L["NO"],
-        fullName = L["Nokhud Offensive"],
-        id = 1198
-    },
-    {
-        shortName = L["AA"],
-        fullName = L["Algethar Academy"],
-        id = 1201
-    },
-    {
-        shortName = L["RLP"],
-        fullName = L["Ruby Life Pools"],
-        id = 1202
-    },
-    {
-        shortName = L["AV"],
-        fullName = L["Azure Vault"],
-        id = 1203
-    },
-    {
-        shortName = L["NEL"],
-        fullName = L["Neltharus"],
-        id = 1199
-    },
-    {
-        shortName = L["BH"],
-        fullName = L["Brackenhide Hollow"],
-        id = 1196
-    },
-    {
-        shortName = L["HOI"],
-        fullName = L["Halls of Infusion"],
-        id = 1204
-    },
-    {
-        shortName = L["ULD"],
-        fullName = L["Uldaman"],
-        id = 1197
-    }
-}
-
 local twwS1 = {
     {
         shortName = L["MOTS"],
@@ -131,14 +88,12 @@ local twwS2 = {
 
 EnhancedMPlusLoot.seasonNames = {
     [0] = L["No season currently active"],
-    [12] = L["Dragonflight Season 4"],
     [13] = L["The War Within Season 1"],
     [14] = L["The War Within Season 2"]
 }
 
 EnhancedMPlusLoot.dungeonIDs = {
     [0] = {},
-    [12] = dfS4,
     [13] = twwS1,
     [14] = twwS2
 }
