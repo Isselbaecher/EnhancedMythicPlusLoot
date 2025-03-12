@@ -98,8 +98,8 @@ L["?"] = "?"
 L["No season currently active"] = "В настоящее время нет активного сезона"
 L["Loot is currently being fetched and may be inaccurate"] = "В настоящее время добыча находится в процессе сбора и может быть неточной"
 L["season is not yet active - loot may be incorrect"] = "сезон еще не активен - добыча может быть некорректной"
-L["loot may be inaccurate"]= "добыча может быть неточной"
-L["Loot is currently being fetched"]= "В настоящее время добыча забирается"
+L["loot may be inaccurate"] = "добыча может быть неточной"
+L["Loot is currently being fetched"] = "В настоящее время добыча забирается"
 
 ------------------------------------------
 L["None"] = "Нет"
