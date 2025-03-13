@@ -64,6 +64,7 @@ L["Crit"] = "Kritisch"
 L["Haste"] = "Tempo"
 L["Mast"] = "Meisterschaft"
 L["Versatility"] = "Vielseitigkeit"
+L["Other"] = "Anderes"
 
 L["Track"] = "Merken"
 

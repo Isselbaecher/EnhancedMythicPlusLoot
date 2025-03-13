@@ -73,6 +73,7 @@ L["Crit"] = true
 L["Haste"] = true
 L["Mast"] = true
 L["Versatility"] = true
+L["Other"] = true
 
 L["Track"] = true
 
