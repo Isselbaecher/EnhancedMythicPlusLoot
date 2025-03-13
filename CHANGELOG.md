@@ -1,4 +1,7 @@
 # Version 0.6
+## 0.6.3-Release
+* Added "Other" to translation
+
 ## 0.6.2-Release
 * Added ru_RU and code cleanup (thanks Hollicsh <3)
 
