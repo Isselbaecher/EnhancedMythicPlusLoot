@@ -44,6 +44,15 @@ L["Dungeons"] = true
 L["Set the font size for the divider text (dungeon/slot)."] = "Setze die Schriftgröße für den Trennertext (Dungeon/Slot)."
 L["Set the font for the divider text (dungeon/slot)."] = "Setze die Schriftart für den Trennertext (Dungeon/Slot)."
 L["Set the font flags for the divider text (dungeon/slot)."] = "Setze die Schriftart Flags für den Trennertext (Dungeon/Slot)."
+L["Divider"] = true
+L["Divider Font"] = true
+L["Divider Font Flags"] = true
+L["Divider Font Size"] = true
+L["Hide minimap icon"] = true
+L["Hides the minimap icon."] = true
+L["Reset tracked loot"] = true
+L["Reload dungeon loot"] = true
+L["Reloads the dungeon loot tables from the adventure journal"] = true
 
 -- Generating loot tables
 L["Fetch loot - "] = "Loot holen - "
@@ -77,17 +86,23 @@ L["Left-click"] = "Links-klick"
 L["Right-click"] = "Rechts-klick"
 L["to toggle the main frame"] = "um das Hauptfenster zu öffnen"
 L["to toggle the options menu"] = "um das Optionenmenü zu öffnen"
+L["Hide minimap icon"] = true
+L["Hides the minimap icon."] = true
 
 -- Chat
 L["Whisper"] = "Flüstern"
 L["Groupchat"] = "Gruppenchat"
-L["Old M+ SeasonId"] = "Alte M+ SeasonId"
-L["New M+ SeasonId"] = "Neue M+ SeasonId"
+L["Old M+ SeasonID: "] = "Alte M+ SeasonID: "
+L["New M+ SeasonID: "] = "Neue M+ SeasonID: "
+L["Do you need "] = true
+L["?"] = true
 
 ------------------------------------------
 L["No season currently active"] = "Momentan ist keine Season aktiv"
 L["Loot is currently being fetched and may be inaccurate"] = "Loot wird momentan geladen und kann ungenau sein"
 L["season is not yet active - loot may be incorrect"] = "Keine Season aktiv - loot kann ungenau sein"
+L["loot may be inaccurate"] = true
+L["Loot is currently being fetched"] = true
 
 
 ------------------------------------------
