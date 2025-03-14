@@ -89,8 +89,8 @@ L["to toggle the options menu"] = "已切换选项菜单"
 -- 聊天
 L["Whisper"] = "密语"
 L["Groupchat"] = "团队聊天"
-L["Old M+ SeasonId"] = "旧版M+ 赛季ID"
-L["New M+ SeasonId"] = "新版M+ 赛季ID"
+L["Old M+ SeasonID: "] = "旧版M+ 赛季ID"
+L["New M+ SeasonID: "] = "新版M+ 赛季ID"
 L["Do you need "] = "请问"
 L["?"] = "您要吗？能否交易给我？"
 

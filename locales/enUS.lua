@@ -86,12 +86,14 @@ L["Left-click"] = true
 L["Right-click"] = true
 L["to toggle the main frame"] = true
 L["to toggle the options menu"] = true
+L["Hide minimap icon"] = true
+L["Hides the minimap icon."] = true
 
 -- Chat
 L["Whisper"] = true
 L["Groupchat"] = true
-L["Old M+ SeasonId"] = true
-L["New M+ SeasonId"] = true
+L["Old M+ SeasonID: "] = true
+L["New M+ SeasonID: "] = true
 L["Do you need "] = true
 L["?"] = true
 

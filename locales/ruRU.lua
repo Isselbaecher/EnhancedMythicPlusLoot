@@ -84,14 +84,14 @@ L["Right-click"] = "ПКМ"
 L["to toggle the main frame"] = "- открыть окно аддона"
 L["to toggle the options menu"] = "- открыть настройки"
 L["Hide minimap icon"] = "Скрыть иконку на миникарте"
-L["Hides the minimap icon."] = "Скрывает значок миникарты."
+L["Hides the minimap icon."] = "Скрывает иконку миникарты."
 
 -- Chat
 L["Whisper"] = "Шепот"
 L["Groupchat"] = "Чат группы"
-L["Old M+ SeasonId"] = "Старые сезонные идентификаторы М+"
-L["New M+ SeasonId"] = "Новые сезонные идентификаторы М+"
-L["Do you need "] = "Вам нужно "
+L["Old M+ SeasonID: "] = "Старые сезонные идентификаторы М+: "
+L["New M+ SeasonID: "] = "Новые сезонные идентификаторы М+: "
+L["Do you need "] = "Вам это нужно "
 L["?"] = "?"
 
 ------------------------------------------
