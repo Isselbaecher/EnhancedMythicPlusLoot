@@ -74,6 +74,7 @@ L["Crit"] = "爆击"
 L["Haste"] = "急速"
 L["Mastery"] = "精通"
 L["Versatility"] = "全能"
+L["Other"] = "其他"
 
 L["Track"] = "追踪"
 
