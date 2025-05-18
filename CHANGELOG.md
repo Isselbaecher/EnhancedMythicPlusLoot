@@ -1,4 +1,7 @@
 # Version 0.6
+## 0.6.5-Release
+* Bump interface versions (thanks Hollicsh)
+
 ## 0.6.4-Release
 * Some translation adjustments (thanks to Valdemar & JiNiTaiMei2023)
 
